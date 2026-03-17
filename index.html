@@ -1,0 +1,3579 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora — Where Dream Weddings Begin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+
+<style>
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+
+--white:#ffffff;
+
+--cream:#fdfaf7;
+
+--blush:#f9e8ec;
+
+--blush2:#f2d0d8;
+
+--pink:#e8a0b4;
+
+--rose:#d4687e;
+
+--deep-rose:#b8445a;
+
+--gold:#c9a96e;
+
+--gold2:#e8c99a;
+
+--text:#2c1a20;
+
+--text2:#6b4451;
+
+--text3:#9c7080;
+
+--border:#f0d8de;
+
+--shadow:rgba(180,80,100,0.12);
+
+--glass:rgba(255,255,255,0.72);
+
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+
+body{font-family:'Jost',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+
+
+
+
+
+
+
+/* PETAL CANVAS */
+
+#petals-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;opacity:0.55}
+
+
+
+/* LOADING SCREEN */
+
+.loader{position:fixed;inset:0;background:var(--white);z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.8s ease,visibility 0.8s ease}
+
+.loader.hidden{opacity:0;visibility:hidden}
+
+.loader-brand{font-family:'Great Vibes',cursive;font-size:clamp(3rem,8vw,6rem);color:var(--rose);animation:loaderPulse 1.8s ease-in-out infinite}
+
+.loader-tagline{font-family:'Jost',sans-serif;font-weight:300;letter-spacing:0.35em;font-size:0.75rem;color:var(--text3);text-transform:uppercase;margin-top:0.5rem;animation:fadeInUp 1s ease 0.4s both}
+
+.loader-bar{width:200px;height:1.5px;background:var(--border);margin-top:2rem;overflow:hidden;border-radius:2px}
+
+.loader-bar-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--rose),var(--gold));animation:loaderFill 2.2s ease forwards}
+
+@keyframes loaderPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.7;transform:scale(1.04)}}
+
+@keyframes loaderFill{0%{width:0}100%{width:100%}}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+@keyframes scaleIn{from{opacity:0;transform:scale(0.88)}to{opacity:1;transform:scale(1)}}
+
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+
+@keyframes spinGold{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+@keyframes petalSway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+
+@keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+
+
+/* SCROLL REVEAL */
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.75s ease,transform 0.75s ease}
+
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.75s ease,transform 0.75s ease}
+
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.75s ease,transform 0.75s ease}
+
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+.reveal-scale{opacity:0;transform:scale(0.9);transition:opacity 0.7s ease,transform 0.7s ease}
+
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+.stagger-1{transition-delay:0.1s}
+
+.stagger-2{transition-delay:0.2s}
+
+.stagger-3{transition-delay:0.3s}
+
+.stagger-4{transition-delay:0.4s}
+
+.stagger-5{transition-delay:0.5s}
+
+.stagger-6{transition-delay:0.6s}
+
+
+
+/* NAV */
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s ease;background:transparent}
+
+nav.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0.8rem 3rem;box-shadow:0 2px 30px var(--shadow);border-bottom:1px solid var(--border)}
+
+.nav-logo{font-family:'Great Vibes',cursive;font-size:2.2rem;color:var(--rose);text-decoration:none;letter-spacing:0.02em;transition:color 0.3s}
+
+.nav-logo span{font-family:'Jost',sans-serif;font-weight:200;font-size:0.6rem;letter-spacing:0.5em;display:block;text-transform:uppercase;color:var(--text3);line-height:1;margin-top:-4px}
+
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+
+.nav-links a{font-weight:300;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text2);text-decoration:none;position:relative;transition:color 0.3s}
+
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--rose);transition:width 0.3s}
+
+.nav-links a:hover{color:var(--rose)}
+
+.nav-links a:hover::after{width:100%}
+
+.nav-cta{background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white!important;padding:0.6rem 1.6rem;border-radius:30px;font-weight:400!important;transition:all 0.3s!important;box-shadow:0 4px 20px rgba(180,68,90,0.3)}
+
+.nav-cta::after{display:none!important}
+
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(180,68,90,0.4)!important}
+
+.nav-menu-btn{display:none;background:none;border:none;flex-direction:column;gap:5px;padding:4px}
+
+.nav-menu-btn span{display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.35s ease}
+
+.nav-menu-btn span:nth-child(1){width:28px}
+
+.nav-menu-btn span:nth-child(2){width:20px}
+
+.nav-menu-btn span:nth-child(3){width:24px}
+
+.nav-menu-btn.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);width:24px}
+
+.nav-menu-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+
+.nav-menu-btn.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);width:24px}
+
+.mobile-nav{position:fixed;inset:0;background:rgba(253,250,247,0.97);backdrop-filter:blur(30px);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;opacity:0;visibility:hidden;transition:all 0.4s ease}
+
+.mobile-nav.open{opacity:1;visibility:visible}
+
+.mobile-nav a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--text);text-decoration:none;letter-spacing:0.05em;transition:color 0.3s}
+
+.mobile-nav a:hover{color:var(--rose)}
+
+
+
+/* HERO */
+
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#fff9fb 0%,#fdf2f5 40%,#fff8f0 100%)}
+
+.hero-bg-floral{position:absolute;inset:0;background-image:radial-gradient(ellipse at 20% 50%,rgba(248,210,220,0.3) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(201,169,110,0.1) 0%,transparent 50%),radial-gradient(ellipse at 60% 80%,rgba(232,160,180,0.2) 0%,transparent 50%);pointer-events:none}
+
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 1.5rem;max-width:900px}
+
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--rose);border:1px solid var(--blush2);padding:0.4rem 1.2rem;border-radius:30px;margin-bottom:2rem;animation:slideDown 1s ease 0.3s both;background:rgba(255,255,255,0.6)}
+
+.hero-badge::before,.hero-badge::after{content:'✦';font-size:0.6rem}
+
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,7rem);font-weight:300;line-height:1.05;color:var(--text);margin-bottom:1.5rem;animation:slideUp 1s ease 0.5s both}
+
+.hero-title em{font-style:italic;color:var(--rose)}
+
+.hero-title .script{font-family:'Great Vibes',cursive;font-size:1.3em;display:block;color:var(--deep-rose);line-height:1.1}
+
+.hero-sub{font-weight:300;font-size:clamp(0.95rem,2vw,1.1rem);color:var(--text3);max-width:560px;margin:0 auto 2.8rem;line-height:1.8;animation:slideUp 1s ease 0.7s both;letter-spacing:0.02em}
+
+.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;animation:slideUp 1s ease 0.9s both}
+
+.btn-primary{background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white;padding:0.9rem 2.4rem;border-radius:40px;border:none;font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:400;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:0.6rem;transition:all 0.35s;box-shadow:0 8px 30px rgba(180,68,90,0.3)}
+
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(180,68,90,0.45)}
+
+.btn-primary .btn-icon{transition:transform 0.3s}
+
+.btn-primary:hover .btn-icon{transform:translateX(4px)}
+
+.btn-outline{background:transparent;color:var(--text2);padding:0.9rem 2.4rem;border-radius:40px;border:1.5px solid var(--border);font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:300;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:0.6rem;transition:all 0.35s}
+
+.btn-outline:hover{border-color:var(--pink);color:var(--rose);transform:translateY(-3px);background:var(--blush)}
+
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;animation:slideUp 1s ease 1.1s both;flex-wrap:wrap}
+
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:500;color:var(--rose);display:block;line-height:1}
+
+.hero-stat-label{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);margin-top:0.3rem}
+
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:fadeIn 1s ease 1.5s both;cursor:none}
+
+.hero-scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--pink),transparent);animation:floatY 2s ease-in-out infinite}
+
+.hero-scroll-text{font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--text3)}
+
+
+
+/* SECTION COMMONS */
+
+.section{padding:clamp(4rem,8vw,8rem) clamp(1.2rem,4vw,3rem);position:relative;z-index:2}
+
+.section-header{text-align:center;margin-bottom:4rem}
+
+.section-eyebrow{font-size:0.72rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--rose);display:block;margin-bottom:0.8rem}
+
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--text);line-height:1.15}
+
+.section-title em{font-style:italic;color:var(--rose)}
+
+.section-sub{font-weight:300;color:var(--text3);max-width:500px;margin:1rem auto 0;line-height:1.8;font-size:0.95rem}
+
+.divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:1.5rem auto;max-width:200px}
+
+.divider-line{flex:1;height:1px;background:var(--border)}
+
+.divider-gem{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+
+
+
+/* MARQUEE */
+
+.marquee-wrap{background:linear-gradient(135deg,var(--rose),var(--deep-rose));padding:0.9rem 0;overflow:hidden;position:relative;z-index:2}
+
+.marquee-track{display:flex;gap:3rem;animation:marqueeScroll 20s linear infinite;width:max-content;white-space:nowrap}
+
+.marquee-track:hover{animation-play-state:paused}
+
+.marquee-item{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.85);display:flex;align-items:center;gap:1.2rem}
+
+.marquee-item::after{content:'✦';color:rgba(255,255,255,0.5);font-size:0.55rem}
+
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+
+
+/* CATEGORIES */
+
+.categories-bg{background:var(--cream)}
+
+.categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;max-width:1200px;margin:0 auto}
+
+.cat-card{background:white;border:1px solid var(--border);border-radius:20px;padding:1.8rem 1rem;text-align:center;transition:all 0.35s;position:relative;overflow:hidden}
+
+.cat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--blush),transparent);opacity:0;transition:opacity 0.35s}
+
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px var(--shadow);border-color:var(--pink)}
+
+.cat-card:hover::before{opacity:1}
+
+.cat-card:hover .cat-icon{transform:scale(1.15) rotate(5deg)}
+
+.cat-icon{font-size:2rem;display:block;margin-bottom:0.8rem;transition:transform 0.35s;position:relative;z-index:1}
+
+.cat-name{font-size:0.8rem;font-weight:400;letter-spacing:0.06em;color:var(--text2);position:relative;z-index:1}
+
+.cat-count{font-size:0.68rem;color:var(--text3);margin-top:0.2rem;position:relative;z-index:1}
+
+
+
+/* HOW IT WORKS */
+
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;max-width:1000px;margin:0 auto;position:relative}
+
+.how-grid::before{content:'';position:absolute;top:3rem;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--pink),var(--border),transparent);z-index:0}
+
+.how-step{text-align:center;position:relative;z-index:1}
+
+.how-num{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blush),white);border:1.5px solid var(--pink);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--rose);position:relative;transition:all 0.35s;box-shadow:0 4px 16px var(--shadow)}
+
+.how-step:hover .how-num{background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white;transform:scale(1.1);box-shadow:0 8px 24px rgba(180,68,90,0.35)}
+
+.how-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--text);margin-bottom:0.6rem}
+
+.how-desc{font-size:0.85rem;font-weight:300;color:var(--text3);line-height:1.7}
+
+
+
+/* VENDOR CARDS */
+
+.vendors-section{background:var(--white)}
+
+.vendors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.8rem;max-width:1200px;margin:0 auto}
+
+.vendor-card{border-radius:24px;overflow:hidden;background:white;border:1px solid var(--border);transition:all 0.4s;position:relative}
+
+.vendor-card:hover{transform:translateY(-8px);box-shadow:0 20px 50px var(--shadow)}
+
+.vendor-img{height:200px;background-size:cover;background-position:center;position:relative;overflow:hidden}
+
+.vendor-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(20,8,10,0.45))}
+
+.vendor-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s}
+
+.vendor-card:hover .vendor-img img{transform:scale(1.08)}
+
+.vendor-badge{position:absolute;top:1rem;left:1rem;z-index:2;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);padding:0.3rem 0.8rem;border-radius:20px;font-size:0.68rem;letter-spacing:0.1em;color:var(--rose);font-weight:500}
+
+.vendor-wishlist{position:absolute;top:1rem;right:1rem;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.3s}
+
+.vendor-wishlist:hover,.vendor-wishlist.active{background:var(--rose);color:white}
+
+.vendor-body{padding:1.4rem}
+
+.vendor-cat{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);margin-bottom:0.4rem}
+
+.vendor-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:0.4rem}
+
+.vendor-loc{font-size:0.8rem;color:var(--text3);display:flex;align-items:center;gap:0.3rem;margin-bottom:0.8rem}
+
+.vendor-meta{display:flex;align-items:center;justify-content:space-between}
+
+.vendor-rating{display:flex;align-items:center;gap:0.3rem;font-size:0.82rem;color:var(--gold)}
+
+.vendor-rating span{color:var(--text2);font-weight:400}
+
+.vendor-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rose)}
+
+.vendor-price small{font-family:'Jost',sans-serif;font-size:0.7rem;color:var(--text3)}
+
+.vendor-actions{display:flex;gap:0.6rem;margin-top:1rem}
+
+.vendor-actions .btn-sm{flex:1;padding:0.6rem;border-radius:12px;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;border:none;font-family:'Jost',sans-serif}
+
+.btn-sm-primary{background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white}
+
+.btn-sm-primary:hover{box-shadow:0 6px 20px rgba(180,68,90,0.4);transform:translateY(-1px)}
+
+.btn-sm-ghost{background:var(--blush);color:var(--rose);border:1px solid var(--border)!important}
+
+.btn-sm-ghost:hover{background:var(--blush2)}
+
+
+
+/* PACKAGES */
+
+.packages-bg{background:linear-gradient(160deg,var(--cream),#fff5f8)}
+
+.packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+
+.pkg-card{border-radius:28px;overflow:hidden;border:1px solid var(--border);background:white;transition:all 0.4s;position:relative}
+
+.pkg-card.featured{border-color:var(--pink);transform:scale(1.03)}
+
+.pkg-card.featured::after{content:'Most Popular';position:absolute;top:1.2rem;right:-2rem;background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.3rem 3.5rem;transform:rotate(40deg);transform-origin:right top}
+
+.pkg-card:hover{box-shadow:0 20px 60px var(--shadow);transform:translateY(-6px)}
+
+.pkg-card.featured:hover{transform:scale(1.03) translateY(-6px)}
+
+.pkg-header{padding:2.5rem 2rem;text-align:center;background:linear-gradient(135deg,var(--blush),#fffaf8)}
+
+.pkg-icon{font-size:2.5rem;margin-bottom:1rem}
+
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:400;color:var(--text)}
+
+.pkg-tagline{font-size:0.8rem;color:var(--text3);margin-top:0.3rem;letter-spacing:0.05em}
+
+.pkg-price{margin-top:1.2rem}
+
+.pkg-price-val{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--rose)}
+
+.pkg-price-note{font-size:0.75rem;color:var(--text3)}
+
+.pkg-body{padding:1.8rem 2rem}
+
+.pkg-feature{display:flex;align-items:center;gap:0.8rem;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;color:var(--text2)}
+
+.pkg-feature:last-child{border-bottom:none}
+
+.pkg-feature::before{content:'✓';color:var(--rose);font-weight:600;flex-shrink:0}
+
+.pkg-footer{padding:1.5rem 2rem;text-align:center}
+
+.pkg-btn{width:100%;padding:0.9rem;border-radius:14px;border:none;font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;transition:all 0.35s}
+
+.pkg-btn-primary{background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white;box-shadow:0 6px 20px rgba(180,68,90,0.3)}
+
+.pkg-btn-primary:hover{box-shadow:0 10px 30px rgba(180,68,90,0.45);transform:translateY(-2px)}
+
+.pkg-btn-outline{background:transparent;color:var(--rose);border:1.5px solid var(--pink)!important}
+
+.pkg-btn-outline:hover{background:var(--blush)}
+
+
+
+/* TESTIMONIALS */
+
+.testimonials-bg{background:var(--white);overflow:hidden}
+
+.testimonials-track-wrap{overflow:hidden;position:relative;max-width:1200px;margin:0 auto}
+
+.testimonials-track-wrap::before,.testimonials-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+
+.testimonials-track-wrap::before{left:0;background:linear-gradient(to right,var(--white),transparent)}
+
+.testimonials-track-wrap::after{right:0;background:linear-gradient(to left,var(--white),transparent)}
+
+.testimonials-track{display:flex;gap:2rem;animation:testimonialScroll 30s linear infinite;width:max-content}
+
+.testimonials-track:hover{animation-play-state:paused}
+
+@keyframes testimonialScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.testi-card{width:340px;flex-shrink:0;background:linear-gradient(135deg,var(--cream),white);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative}
+
+.testi-quote{font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--blush2);line-height:0.6;margin-bottom:1rem;display:block}
+
+.testi-text{font-size:0.9rem;line-height:1.8;color:var(--text2);font-weight:300;font-style:italic;margin-bottom:1.5rem}
+
+.testi-author{display:flex;align-items:center;gap:0.8rem}
+
+.testi-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blush2),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--deep-rose);font-weight:600;flex-shrink:0}
+
+.testi-name{font-weight:500;font-size:0.88rem;color:var(--text)}
+
+.testi-detail{font-size:0.75rem;color:var(--text3)}
+
+.testi-stars{color:var(--gold);font-size:0.75rem;letter-spacing:0.1em;margin-bottom:2px}
+
+
+
+/* GALLERY */
+
+.gallery-bg{background:var(--cream)}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;max-width:1200px;margin:0 auto}
+
+.gallery-item{border-radius:20px;overflow:hidden;position:relative;background:var(--blush)}
+
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s}
+
+.gallery-item:hover img{transform:scale(1.08)}
+
+.gallery-item:nth-child(1){grid-row:span 2}
+
+.gallery-item:nth-child(4){grid-column:span 2}
+
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);opacity:0;transition:opacity 0.35s;display:flex;align-items:flex-end;padding:1.2rem}
+
+.gallery-item:hover .gallery-overlay{opacity:1}
+
+.gallery-label{color:white;font-size:0.8rem;letter-spacing:0.1em}
+
+.gallery-placeholder{width:100%;height:200px;background:linear-gradient(135deg,var(--blush),var(--blush2));display:flex;align-items:center;justify-content:center;font-size:2.5rem;border-radius:20px}
+
+.gallery-item:nth-child(1) .gallery-placeholder{height:420px}
+
+
+
+/* BUDGET CALCULATOR */
+
+.calc-bg{background:linear-gradient(160deg,var(--text) 0%,#3a1a22 100%);color:white;position:relative;overflow:hidden}
+
+.calc-bg::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,160,180,0.08) 0%,transparent 70%)}
+
+.calc-wrap{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+
+.calc-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;margin-bottom:1rem}
+
+.calc-title em{font-style:italic;color:var(--gold2)}
+
+.calc-desc{font-weight:300;font-size:0.9rem;line-height:1.8;color:rgba(255,255,255,0.65)}
+
+.calc-form{display:flex;flex-direction:column;gap:1.2rem}
+
+.calc-label{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block;margin-bottom:0.4rem}
+
+.calc-input{width:100%;padding:0.9rem 1.2rem;border-radius:14px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);color:white;font-family:'Jost',sans-serif;font-size:0.9rem;transition:border-color 0.3s;outline:none}
+
+.calc-input:focus{border-color:var(--pink)}
+
+.calc-input option{background:#2c1a20;color:white}
+
+.calc-result{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:1.5rem;text-align:center;display:none}
+
+.calc-result.show{display:block;animation:scaleIn 0.5s ease}
+
+.calc-result-label{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.5rem}
+
+.calc-result-val{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold2)}
+
+.calc-result-note{font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:0.3rem}
+
+.calc-btn-wrap{margin-top:0.5rem}
+
+
+
+/* FEATURES SECTION */
+
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+
+.feat-card{padding:2rem;border-radius:24px;background:white;border:1px solid var(--border);transition:all 0.35s;cursor:none}
+
+.feat-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px var(--shadow);border-color:var(--pink)}
+
+.feat-icon-wrap{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--blush),var(--blush2));display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.2rem;transition:transform 0.35s}
+
+.feat-card:hover .feat-icon-wrap{transform:rotate(5deg) scale(1.1)}
+
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:500;color:var(--text);margin-bottom:0.5rem}
+
+.feat-desc{font-size:0.85rem;font-weight:300;color:var(--text3);line-height:1.7}
+
+
+
+/* FAQ */
+
+.faq-bg{background:var(--cream)}
+
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:0.8rem}
+
+.faq-item{border-radius:16px;border:1px solid var(--border);overflow:hidden;background:white;transition:border-color 0.3s}
+
+.faq-item.open{border-color:var(--pink)}
+
+.faq-q{padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+
+.faq-q-text{font-weight:400;font-size:0.95rem;color:var(--text);flex:1}
+
+.faq-toggle{width:28px;height:28px;border-radius:50%;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--rose);transition:all 0.3s;flex-shrink:0;line-height:1}
+
+.faq-item.open .faq-toggle{background:var(--rose);color:white;transform:rotate(45deg)}
+
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s}
+
+.faq-a-inner{padding:0 1.5rem 1.2rem;font-size:0.88rem;font-weight:300;line-height:1.8;color:var(--text3)}
+
+.faq-item.open .faq-a{max-height:300px}
+
+
+
+/* NEWSLETTER */
+
+.newsletter-bg{background:linear-gradient(135deg,var(--rose),var(--deep-rose));position:relative;overflow:hidden;text-align:center;padding:5rem 2rem}
+
+.newsletter-bg::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+
+.newsletter-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:white;margin-bottom:0.8rem}
+
+.newsletter-sub{color:rgba(255,255,255,0.75);font-weight:300;font-size:0.95rem;margin-bottom:2.5rem}
+
+.newsletter-form{display:flex;gap:0;max-width:460px;margin:0 auto;border-radius:40px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+
+.newsletter-input{flex:1;padding:1rem 1.5rem;border:none;background:rgba(255,255,255,0.95);font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text);outline:none}
+
+.newsletter-btn{padding:1rem 1.8rem;background:var(--text);color:white;border:none;font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;transition:background 0.3s;white-space:nowrap}
+
+.newsletter-btn:hover{background:var(--deep-rose)}
+
+
+
+/* FOOTER */
+
+footer{background:var(--text);color:rgba(255,255,255,0.7);padding:5rem 3rem 2rem;position:relative;z-index:2}
+
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+
+.footer-brand-name{font-family:'Great Vibes',cursive;font-size:2.5rem;color:var(--pink);display:block;margin-bottom:0.4rem}
+
+.footer-brand-tagline{font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:1.2rem}
+
+.footer-brand-desc{font-size:0.85rem;font-weight:300;line-height:1.8;max-width:280px}
+
+.footer-socials{display:flex;gap:0.8rem;margin-top:1.5rem}
+
+.social-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:rgba(255,255,255,0.6);text-decoration:none;transition:all 0.3s;cursor:none}
+
+.social-btn:hover{background:var(--rose);color:white;transform:translateY(-3px)}
+
+.footer-col-title{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1.2rem}
+
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+
+.footer-links a{font-size:0.85rem;font-weight:300;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s;cursor:none}
+
+.footer-links a:hover{color:var(--pink)}
+
+.footer-bottom{max-width:1200px;margin:2rem auto 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:0.78rem}
+
+.footer-bottom-left{color:rgba(255,255,255,0.3)}
+
+.footer-bottom-heart{color:var(--rose);display:inline}
+
+.footer-bottom-right{display:flex;gap:1.5rem}
+
+.footer-bottom-right a{color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.3s;cursor:none}
+
+.footer-bottom-right a:hover{color:var(--pink)}
+
+
+
+/* MARKETPLACE PAGE */
+
+.page{display:none}
+
+.page.active{display:block}
+
+.marketplace-hero{background:linear-gradient(160deg,var(--cream),#fff5f8);padding:8rem 3rem 4rem;text-align:center}
+
+.search-wrap{max-width:700px;margin:2rem auto 0;position:relative}
+
+.search-bar{display:flex;border-radius:50px;overflow:hidden;box-shadow:0 8px 30px var(--shadow);background:white;border:1px solid var(--border)}
+
+.search-input{flex:1;padding:1.1rem 1.5rem;border:none;font-family:'Jost',sans-serif;font-size:0.95rem;outline:none;background:transparent;color:var(--text)}
+
+.search-btn{padding:0.9rem 2rem;background:linear-gradient(135deg,var(--rose),var(--deep-rose));color:white;border:none;font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;border-radius:0 50px 50px 0;transition:all 0.3s}
+
+.search-btn:hover{opacity:0.9}
+
+.filter-bar{background:white;border-bottom:1px solid var(--border);padding:1rem 3rem;position:sticky;top:76px;z-index:99;display:flex;align-items:center;gap:1rem;overflow-x:auto;scrollbar-width:none}
+
+.filter-bar::-webkit-scrollbar{display:none}
+
+.filter-chip{padding:0.45rem 1.1rem;border-radius:20px;border:1px solid var(--border);font-size:0.78rem;transition:all 0.25s;background:white;color:var(--text2);white-space:nowrap;font-family:'Jost',sans-serif}
+
+.filter-chip.active,.filter-chip:hover{background:var(--rose);color:white;border-color:var(--rose)}
+
+.filter-select{padding:0.45rem 1.1rem;border-radius:20px;border:1px solid var(--border);font-size:0.78rem;background:white;color:var(--text2);font-family:'Jost',sans-serif;outline:none}
+
+.marketplace-content{padding:3rem;max-width:1300px;margin:0 auto}
+
+.view-toggle{display:flex;gap:0.5rem;margin-left:auto}
+
+.view-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.3s}
+
+.view-btn.active{background:var(--rose);color:white;border-color:var(--rose)}
+
+.results-header{display:flex;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+
+.results-count{font-size:0.85rem;color:var(--text3)}
+
+.results-count strong{color:var(--text);font-weight:500}
+
+
+
+/* VENDOR DETAIL PAGE */
+
+.vendor-detail-hero{height:420px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end}
+
+.vendor-detail-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65),rgba(0,0,0,0.1))}
+
+.vendor-detail-hero-content{position:relative;z-index:1;padding:2.5rem 3rem;color:white;width:100%}
+
+.vendor-detail-cat{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:0.5rem}
+
+.vendor-detail-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:300}
+
+.vendor-detail-body{max-width:1200px;margin:0 auto;padding:3rem;display:grid;grid-template-columns:2fr 1fr;gap:3rem;align-items:start}
+
+.pkg-list{display:flex;flex-direction:column;gap:1rem;margin-top:1rem}
+
+.pkg-list-item{border:1px solid var(--border);border-radius:16px;padding:1.4rem;transition:all 0.3s}
+
+.pkg-list-item:hover{border-color:var(--pink);box-shadow:0 6px 20px var(--shadow)}
+
+.pkg-list-item.selected{border-color:var(--rose);background:var(--blush)}
+
+.booking-card{background:white;border:1px solid var(--border);border-radius:24px;padding:2rem;position:sticky;top:100px}
+
+.booking-card-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:1.5rem;color:var(--text)}
+
+.form-group{margin-bottom:1rem}
+
+.form-label{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:0.4rem}
+
+.form-control{width:100%;padding:0.8rem 1rem;border:1px solid var(--border);border-radius:12px;font-family:'Jost',sans-serif;font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.3s;background:var(--cream)}
+
+.form-control:focus{border-color:var(--pink)}
+
+.reviews-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:1.5rem}
+
+.review-item{border-bottom:1px solid var(--border);padding-bottom:1.5rem}
+
+.review-author{font-weight:500;font-size:0.9rem;color:var(--text)}
+
+.review-stars{color:var(--gold);font-size:0.8rem}
+
+.review-text{font-size:0.85rem;font-weight:300;color:var(--text2);line-height:1.7;margin-top:0.5rem}
+
+
+
+/* DASHBOARD */
+
+.dashboard-layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh;padding-top:76px}
+
+.dash-sidebar{background:white;border-right:1px solid var(--border);padding:2rem 0;position:sticky;top:76px;height:calc(100vh - 76px);overflow-y:auto}
+
+.dash-user{padding:1.5rem 1.5rem 2rem;border-bottom:1px solid var(--border);text-align:center}
+
+.dash-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--deep-rose));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:white;margin:0 auto 0.8rem}
+
+.dash-user-name{font-weight:500;font-size:0.95rem;color:var(--text)}
+
+.dash-user-sub{font-size:0.75rem;color:var(--text3);margin-top:0.2rem}
+
+.dash-nav{list-style:none;padding:1rem 0}
+
+.dash-nav-item{display:flex;align-items:center;gap:0.8rem;padding:0.8rem 1.5rem;transition:all 0.25s;font-size:0.85rem;color:var(--text2)}
+
+.dash-nav-item:hover,.dash-nav-item.active{background:var(--blush);color:var(--rose)}
+
+.dash-nav-item.active{border-right:2px solid var(--rose)}
+
+.dash-nav-icon{width:18px;text-align:center;font-size:0.9rem}
+
+.dash-content{padding:2.5rem;background:var(--cream)}
+
+.dash-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+
+.dash-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--text)}
+
+.dash-subtitle{font-size:0.85rem;color:var(--text3);margin-top:0.2rem}
+
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-bottom:2.5rem}
+
+.stat-card{background:white;border:1px solid var(--border);border-radius:20px;padding:1.5rem;transition:all 0.3s;cursor:none}
+
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px var(--shadow)}
+
+.stat-icon{font-size:1.5rem;margin-bottom:0.8rem}
+
+.stat-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--rose);line-height:1}
+
+.stat-label{font-size:0.75rem;color:var(--text3);margin-top:0.3rem;letter-spacing:0.05em}
+
+.dash-section-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--text);margin-bottom:1.2rem}
+
+.checklist-item{display:flex;align-items:center;gap:1rem;padding:0.9rem 1.2rem;background:white;border:1px solid var(--border);border-radius:14px;margin-bottom:0.7rem;transition:all 0.25s}
+
+.checklist-item:hover{border-color:var(--pink)}
+
+.checklist-item.done{opacity:0.5}
+
+.checklist-cb{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all 0.25s;flex-shrink:0}
+
+.checklist-item.done .checklist-cb{background:var(--rose);border-color:var(--rose);color:white;font-size:0.7rem}
+
+.checklist-text{flex:1;font-size:0.88rem;color:var(--text2)}
+
+.checklist-item.done .checklist-text{text-decoration:line-through}
+
+.checklist-date{font-size:0.72rem;color:var(--text3)}
+
+.countdown-card{background:linear-gradient(135deg,var(--rose),var(--deep-rose));border-radius:20px;padding:2rem;color:white;text-align:center;margin-bottom:2rem}
+
+.countdown-label{font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:1rem}
+
+.countdown-nums{display:flex;justify-content:center;gap:1.5rem}
+
+.countdown-unit{text-align:center}
+
+.countdown-val{font-family:'Cormorant Garamond',serif;font-size:3rem;line-height:1;display:block}
+
+.countdown-unit-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-top:0.2rem}
+
+.budget-bar{background:var(--blush2);border-radius:6px;height:10px;overflow:hidden;margin:0.5rem 0}
+
+.budget-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--deep-rose));border-radius:6px;transition:width 0.8s ease}
+
+.budget-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+
+.budget-category{font-size:0.82rem;color:var(--text2)}
+
+.budget-amount{font-size:0.82rem;font-weight:500;color:var(--text)}
+
+.booking-list-item{display:flex;align-items:center;gap:1.2rem;padding:1.2rem;background:white;border:1px solid var(--border);border-radius:16px;margin-bottom:0.8rem;transition:all 0.3s}
+
+.booking-list-item:hover{border-color:var(--pink);box-shadow:0 6px 20px var(--shadow)}
+
+.booking-vendor-img{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--blush),var(--blush2));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+
+.booking-vendor-name{font-weight:500;font-size:0.92rem;color:var(--text)}
+
+.booking-vendor-cat{font-size:0.75rem;color:var(--text3)}
+
+.booking-status{margin-left:auto;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500}
+
+.status-confirmed{background:#e8f8f0;color:#2d8a5a}
+
+.status-pending{background:#fff8e8;color:#8a6a2d}
+
+.status-inquiry{background:var(--blush);color:var(--deep-rose)}
+
+
+
+/* AUTH PAGE */
+
+.auth-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:76px}
+
+.auth-visual{background:linear-gradient(160deg,var(--rose),var(--deep-rose));display:flex;align-items:center;justify-content:center;padding:3rem;flex-direction:column;text-align:center;position:relative;overflow:hidden}
+
+.auth-visual::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0L80 12v2L54 40h-2zm4 0L80 16v2L58 40h-2zm4 0L80 20v2L62 40h-2zm4 0L80 24v2L66 40h-2zm4 0L80 28v2L70 40h-2zm4 0L80 32v2L74 40h-2zm4 0L80 36v2L78 40h-2zm4 0L80 40L80 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+
+.auth-visual-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:white;position:relative;z-index:1}
+
+.auth-visual-sub{color:rgba(255,255,255,0.7);font-weight:300;font-size:0.9rem;margin-top:0.8rem;position:relative;z-index:1}
+
+.auth-form-wrap{display:flex;align-items:center;justify-content:center;padding:3rem;background:var(--cream)}
+
+.auth-form-box{width:100%;max-width:440px}
+
+.auth-form-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:400;color:var(--text);margin-bottom:0.5rem}
+
+.auth-form-sub{font-size:0.88rem;color:var(--text3);margin-bottom:2.5rem}
+
+.auth-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:2rem}
+
+.auth-tab{flex:1;padding:0.8rem;text-align:center;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.3s;color:var(--text3);background:white;font-family:'Jost',sans-serif;border:none}
+
+.auth-tab.active{background:var(--rose);color:white}
+
+.social-login{display:flex;gap:1rem;margin-bottom:1.5rem}
+
+.social-login-btn{flex:1;padding:0.8rem;border:1px solid var(--border);border-radius:12px;background:white;font-size:0.82rem;color:var(--text2);font-family:'Jost',sans-serif;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+
+.social-login-btn:hover{border-color:var(--pink);color:var(--rose)}
+
+.auth-divider{text-align:center;position:relative;margin:1.5rem 0}
+
+.auth-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)}
+
+.auth-divider span{position:relative;background:var(--cream);padding:0 1rem;font-size:0.75rem;color:var(--text3);letter-spacing:0.1em}
+
+
+
+/* ABOUT PAGE */
+
+.about-hero{min-height:60vh;background:linear-gradient(160deg,var(--cream),#fff5f8);display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem}
+
+.about-story{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5rem 3rem}
+
+.about-visual{background:linear-gradient(135deg,var(--blush),var(--blush2));border-radius:30px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;font-size:6rem;position:relative;overflow:hidden}
+
+.about-visual::before{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(232,160,180,0.3),transparent)}
+
+.about-text-block{font-size:0.95rem;font-weight:300;line-height:1.9;color:var(--text2)}
+
+.about-text-block p{margin-bottom:1.2rem}
+
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
+
+.team-card{text-align:center;cursor:none}
+
+.team-avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--blush),var(--pink));display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 1rem;transition:transform 0.35s;border:3px solid white;box-shadow:0 4px 16px var(--shadow)}
+
+.team-card:hover .team-avatar{transform:scale(1.08)}
+
+.team-name{font-weight:500;font-size:0.92rem;color:var(--text)}
+
+.team-role{font-size:0.78rem;color:var(--text3);margin-top:0.2rem}
+
+
+
+/* CONTACT PAGE */
+
+.contact-wrap{max-width:1100px;margin:0 auto;padding:8rem 3rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+
+.contact-info-card{background:linear-gradient(135deg,var(--rose),var(--deep-rose));border-radius:28px;padding:3rem;color:white;position:sticky;top:100px}
+
+.contact-info-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:2rem}
+
+.contact-info-icon{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+
+.contact-info-label{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.3rem}
+
+.contact-info-val{font-size:0.9rem;font-weight:300}
+
+.contact-form-box{background:white;border-radius:28px;padding:3rem;border:1px solid var(--border)}
+
+
+
+/* QUIZ / BUILD WEDDING */
+
+.quiz-wrap{max-width:720px;margin:0 auto;padding:8rem 2rem 5rem;text-align:center}
+
+.quiz-step{display:none;animation:scaleIn 0.4s ease}
+
+.quiz-step.active{display:block}
+
+.quiz-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:2rem 0;text-align:left}
+
+.quiz-option{padding:1.2rem;border-radius:18px;border:1.5px solid var(--border);transition:all 0.3s;background:white}
+
+.quiz-option:hover,.quiz-option.selected{border-color:var(--rose);background:var(--blush)}
+
+.quiz-option-icon{font-size:1.8rem;margin-bottom:0.5rem;display:block}
+
+.quiz-option-label{font-size:0.88rem;font-weight:400;color:var(--text)}
+
+.quiz-progress{height:4px;background:var(--border);border-radius:2px;margin-bottom:3rem;overflow:hidden}
+
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--pink),var(--rose));border-radius:2px;transition:width 0.4s ease}
+
+
+
+/* RESPONSIVE */
+
+@media(max-width:1024px){
+
+.nav-links{display:none}
+
+.nav-menu-btn{display:flex}
+
+.calc-wrap{grid-template-columns:1fr}
+
+.vendor-detail-body{grid-template-columns:1fr}
+
+.dashboard-layout{grid-template-columns:1fr}
+
+.dash-sidebar{position:relative;top:0;height:auto;display:none}
+
+.auth-wrap{grid-template-columns:1fr}
+
+.auth-visual{display:none}
+
+.about-story{grid-template-columns:1fr}
+
+.contact-wrap{grid-template-columns:1fr}
+
+.footer-grid{grid-template-columns:1fr 1fr}
+
+}
+
+@media(max-width:640px){
+
+nav{padding:1rem 1.2rem}
+
+nav.scrolled{padding:0.7rem 1.2rem}
+
+.hero-stats{gap:1.5rem}
+
+.categories-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+
+.vendors-grid{grid-template-columns:1fr}
+
+.packages-grid{grid-template-columns:1fr}
+
+.gallery-grid{grid-template-columns:1fr 1fr}
+
+.gallery-item:nth-child(1){grid-row:span 1}
+
+.gallery-item:nth-child(4){grid-column:span 1}
+
+.footer-grid{grid-template-columns:1fr}
+
+.filter-bar{padding:0.8rem 1rem}
+
+.marketplace-content{padding:1.5rem}
+
+.dashboard-layout{padding-top:76px}
+
+.dash-content{padding:1.5rem}
+
+.section{padding:3rem 1.2rem}
+
+.how-grid::before{display:none}
+
+.newsletter-form{flex-direction:column;border-radius:20px}
+
+.newsletter-input{border-radius:20px 20px 0 0}
+
+.newsletter-btn{border-radius:0 0 20px 20px}
+
+}
+
+/* ICONS */
+
+.icon-svg{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle}
+
+.icon-svg svg{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+.cat-icon .icon-svg svg,.cat-icon svg{width:2rem;height:2rem;stroke:var(--rose);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+.feat-icon-wrap .icon-svg svg,.feat-icon-wrap svg{width:1.8rem;height:1.8rem;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+.stat-icon .icon-svg svg,.stat-icon svg{width:1.4rem;height:1.4rem;stroke:var(--rose);fill:none;stroke-width:1.5}
+
+.contact-info-icon .icon-svg svg,.contact-info-icon svg{width:1.2rem;height:1.2rem;stroke:white;fill:none;stroke-width:1.5}
+
+.social-btn .icon-svg svg,.social-btn svg{width:1rem;height:1rem;stroke:rgba(255,255,255,0.6);fill:none;stroke-width:1.5}
+
+.about-visual .icon-svg svg,.about-visual svg{width:5rem;height:5rem;stroke:var(--rose);fill:none;stroke-width:1}
+
+.quiz-option-icon .icon-svg svg,.quiz-option-icon svg{width:1.8rem;height:1.8rem;fill:none;stroke-width:1.5}
+
+.pkg-icon .icon-svg svg,.pkg-icon svg{width:2.5rem;height:2.5rem;stroke:var(--rose);fill:none;stroke-width:1.5}
+
+.vendor-loc .icon-svg svg,.vendor-loc svg{width:0.85rem;height:0.85rem;stroke:var(--text3);fill:none;stroke-width:1.5}
+
+.auth-flower svg{width:5rem;height:5rem;stroke:white;fill:none;stroke-width:1}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<!-- PETAL CANVAS -->
+
+<canvas id="petals-canvas"></canvas>
+
+
+
+<!-- LOADER -->
+
+<div class="loader" id="loader">
+
+  <div class="loader-brand">Velora</div>
+
+  <div class="loader-tagline">Wedding Marketplace</div>
+
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+
+</div>
+
+
+
+<!-- NAV -->
+
+<nav id="mainNav">
+
+  <a href="#" class="nav-logo" onclick="showPage('home')">Velora<span>Wedding Marketplace</span></a>
+
+  <ul class="nav-links">
+
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+
+    <li><a href="#" onclick="showPage('marketplace')">Vendors</a></li>
+
+    <li><a href="#" onclick="showPage('packages')">Packages</a></li>
+
+    <li><a href="#" onclick="showPage('about')">About</a></li>
+
+    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+
+    <li><a href="#" class="nav-cta" onclick="showPage('auth')">Sign In</a></li>
+
+  </ul>
+
+  <button class="nav-menu-btn" id="menuBtn" onclick="toggleMobileNav()">
+
+    <span></span><span></span><span></span>
+
+  </button>
+
+</nav>
+
+
+
+<!-- MOBILE NAV -->
+
+<div class="mobile-nav" id="mobileNav">
+
+  <a href="#" onclick="showPage('home');toggleMobileNav()">Home</a>
+
+  <a href="#" onclick="showPage('marketplace');toggleMobileNav()">Vendors</a>
+
+  <a href="#" onclick="showPage('packages');toggleMobileNav()">Packages</a>
+
+  <a href="#" onclick="showPage('about');toggleMobileNav()">About</a>
+
+  <a href="#" onclick="showPage('contact');toggleMobileNav()">Contact</a>
+
+  <a href="#" onclick="showPage('auth');toggleMobileNav()">Sign In</a>
+
+</div>
+
+
+
+<!-- ======================== HOME PAGE ======================== -->
+
+<div class="page active" id="page-home">
+
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-bg-floral"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-badge">✦ India's Premier Wedding Marketplace ✦</div>
+
+    <h1 class="hero-title">
+
+      Where Dream<br>Weddings
+
+      <span class="script">Begin</span>
+
+    </h1>
+
+    <p class="hero-sub">Book venues, photographers, bridal wear, catering, and every wedding essential in one elegant marketplace — crafted for your perfect day.</p>
+
+    <div class="hero-btns">
+
+      <a href="#" class="btn-primary" onclick="showPage('marketplace')">Explore Vendors <span class="btn-icon">→</span></a>
+
+      <a href="#" class="btn-outline" onclick="showPage('quiz')"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Plan My Wedding</a>
+
+      <a href="#" class="btn-outline" onclick="showPage('packages')">View Packages</a>
+
+    </div>
+
+    <div class="hero-stats">
+
+      <div><span class="hero-stat-num">12K+</span><div class="hero-stat-label">Verified Vendors</div></div>
+
+      <div><span class="hero-stat-num">95K+</span><div class="hero-stat-label">Happy Couples</div></div>
+
+      <div><span class="hero-stat-num">350+</span><div class="hero-stat-label">Cities Covered</div></div>
+
+      <div><span class="hero-stat-num">4.9★</span><div class="hero-stat-label">Average Rating</div></div>
+
+    </div>
+
+  </div>
+
+  <div class="hero-scroll">
+
+    <span class="hero-scroll-text">Scroll</span>
+
+    <div class="hero-scroll-line"></div>
+
+  </div>
+
+</section>
+
+
+
+<!-- MARQUEE -->
+
+<div class="marquee-wrap">
+
+  <div class="marquee-track" id="marqueeTrack">
+
+    <span class="marquee-item">Venues</span>
+
+    <span class="marquee-item">Photography</span>
+
+    <span class="marquee-item">Bridal Wear</span>
+
+    <span class="marquee-item">Catering</span>
+
+    <span class="marquee-item">Decor</span>
+
+    <span class="marquee-item">Makeup Artists</span>
+
+    <span class="marquee-item">Mehendi</span>
+
+    <span class="marquee-item">DJs & Bands</span>
+
+    <span class="marquee-item">Wedding Planners</span>
+
+    <span class="marquee-item">Jewelry</span>
+
+    <span class="marquee-item">Honeymoon</span>
+
+    <span class="marquee-item">Invitations</span>
+
+    <span class="marquee-item">Cakes</span>
+
+    <span class="marquee-item">Transport</span>
+
+    <span class="marquee-item">Venues</span>
+
+    <span class="marquee-item">Photography</span>
+
+    <span class="marquee-item">Bridal Wear</span>
+
+    <span class="marquee-item">Catering</span>
+
+    <span class="marquee-item">Decor</span>
+
+    <span class="marquee-item">Makeup Artists</span>
+
+    <span class="marquee-item">Mehendi</span>
+
+    <span class="marquee-item">DJs & Bands</span>
+
+    <span class="marquee-item">Wedding Planners</span>
+
+    <span class="marquee-item">Jewelry</span>
+
+    <span class="marquee-item">Honeymoon</span>
+
+    <span class="marquee-item">Invitations</span>
+
+    <span class="marquee-item">Cakes</span>
+
+    <span class="marquee-item">Transport</span>
+
+  </div>
+
+</div>
+
+
+
+<!-- CATEGORIES -->
+
+<section class="section categories-bg" id="categories">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Browse by Category</span>
+
+    <h2 class="section-title reveal">Every Wedding Essential,<br><em>All in One Place</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    <p class="section-sub reveal">From intimate ceremonies to grand celebrations — discover vendors across every wedding category.</p>
+
+  </div>
+
+  <div class="categories-grid" id="categoriesGrid">
+
+    <!-- populated by JS -->
+
+  </div>
+
+</section>
+
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" style="background:white">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Simple & Elegant</span>
+
+    <h2 class="section-title reveal">How <em>Velora</em> Works</h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  </div>
+
+  <div class="how-grid">
+
+    <div class="how-step reveal stagger-1">
+
+      <div class="how-num">01</div>
+
+      <div class="how-title">Browse Services</div>
+
+      <p class="how-desc">Explore thousands of verified vendors across 16+ wedding categories. Filter by city, budget, style and rating.</p>
+
+    </div>
+
+    <div class="how-step reveal stagger-2">
+
+      <div class="how-num">02</div>
+
+      <div class="how-title">Compare & Save</div>
+
+      <p class="how-desc">Shortlist your favourites, compare packages side by side, and read genuine reviews from real couples.</p>
+
+    </div>
+
+    <div class="how-step reveal stagger-3">
+
+      <div class="how-num">03</div>
+
+      <div class="how-title">Book Seamlessly</div>
+
+      <p class="how-desc">Request quotes, check availability, and book directly through Velora — safely and transparently.</p>
+
+    </div>
+
+    <div class="how-step reveal stagger-4">
+
+      <div class="how-num">04</div>
+
+      <div class="how-title">Manage Everything</div>
+
+      <p class="how-desc">Track bookings, manage your budget, build your checklist, and coordinate all vendors from your dashboard.</p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- FEATURED VENDORS -->
+
+<section class="section vendors-section">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Handpicked for You</span>
+
+    <h2 class="section-title reveal">Trending <em>Vendors</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    <p class="section-sub reveal">Discover the most loved wedding professionals right now.</p>
+
+  </div>
+
+  <div class="vendors-grid" id="vendorsGrid">
+
+    <!-- populated by JS -->
+
+  </div>
+
+  <div style="text-align:center;margin-top:3rem" class="reveal">
+
+    <a href="#" class="btn-primary" onclick="showPage('marketplace')">View All Vendors <span class="btn-icon">→</span></a>
+
+  </div>
+
+</section>
+
+
+
+<!-- BUDGET CALCULATOR -->
+
+<section class="section calc-bg">
+
+  <div class="calc-wrap">
+
+    <div class="reveal-left">
+
+      <span class="section-eyebrow" style="color:var(--gold2)">Plan Smarter</span>
+
+      <h2 class="calc-title">Estimate Your<br><em>Dream Wedding</em><br>Budget</h2>
+
+      <p class="calc-desc">Use our intelligent budget estimator to get a realistic breakdown of wedding costs based on your preferences and guest count.</p>
+
+    </div>
+
+    <div class="reveal-right">
+
+      <div class="calc-form">
+
+        <div>
+
+          <label class="calc-label">Wedding Style</label>
+
+          <select class="calc-input" id="calcStyle">
+
+            <option value="">Select style</option>
+
+            <option value="intimate">Intimate (under 50 guests)</option>
+
+            <option value="mid">Mid-Size (50–150 guests)</option>
+
+            <option value="grand">Grand (150–300 guests)</option>
+
+            <option value="luxury">Luxury (300+ guests)</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label class="calc-label">City / Region</label>
+
+          <select class="calc-input" id="calcCity">
+
+            <option value="">Select city tier</option>
+
+            <option value="metro">Metro City (Mumbai, Delhi, Bangalore)</option>
+
+            <option value="tier2">Tier 2 City (Pune, Hyderabad, Ahmedabad)</option>
+
+            <option value="tier3">Tier 3 / Town</option>
+
+          </select>
+
+        </div>
+
+        <div>
+
+          <label class="calc-label">Services Needed</label>
+
+          <select class="calc-input" id="calcServices">
+
+            <option value="basic">Basic (Venue + Catering + Decor)</option>
+
+            <option value="standard">Standard (+ Photography + Makeup + Mehendi)</option>
+
+            <option value="premium">Premium (All services included)</option>
+
+          </select>
+
+        </div>
+
+        <div class="calc-result" id="calcResult">
+
+          <div class="calc-result-label">Estimated Budget Range</div>
+
+          <div class="calc-result-val" id="calcVal">₹0 — ₹0</div>
+
+          <div class="calc-result-note">Actual costs vary by vendor. Get exact quotes on Velora.</div>
+
+        </div>
+
+        <div class="calc-btn-wrap">
+
+          <button class="btn-primary" style="width:100%;justify-content:center;border:none" onclick="calculateBudget()">Calculate My Budget ✦</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- FEATURES -->
+
+<section class="section" style="background:var(--cream)">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Why Velora</span>
+
+    <h2 class="section-title reveal">Everything You Need to <em>Plan Perfectly</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  </div>
+
+  <div class="features-grid">
+
+    <div class="feat-card reveal stagger-1"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="feat-title">Verified Vendors Only</div><p class="feat-desc">Every vendor on Velora is personally verified for quality, reliability, and professionalism before listing.</p></div>
+
+    <div class="feat-card reveal stagger-2"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="feat-title">Transparent Pricing</div><p class="feat-desc">No hidden fees. Compare real package prices and request custom quotes directly from vendors.</p></div>
+
+    <div class="feat-card reveal stagger-3"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="feat-title">Wedding Dashboard</div><p class="feat-desc">Manage all bookings, checklist, budget, and appointments from one elegant planning hub.</p></div>
+
+    <div class="feat-card reveal stagger-4"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div><div class="feat-title">AI Recommendations</div><p class="feat-desc">Our smart algorithm learns your style and budget to surface perfect vendor matches for your wedding.</p></div>
+
+    <div class="feat-card reveal stagger-5"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="feat-title">Instant Communication</div><p class="feat-desc">Chat directly with vendors, request quotes, and confirm details without leaving the platform.</p></div>
+
+    <div class="feat-card reveal stagger-6"><div class="feat-icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="feat-title">Genuine Reviews</div><p class="feat-desc">Only verified couples who booked through Velora can leave reviews — completely authentic and trustworthy.</p></div>
+
+  </div>
+
+</section>
+
+
+
+<!-- TESTIMONIALS -->
+
+<section class="section testimonials-bg">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Love Stories</span>
+
+    <h2 class="section-title reveal">Couples Who Found Their<br><em>Perfect Wedding</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  </div>
+
+  <div class="testimonials-track-wrap reveal">
+
+    <div class="testimonials-track" id="testiTrack">
+
+      <!-- populated by JS -->
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- GALLERY -->
+
+<section class="section gallery-bg">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Inspiration Gallery</span>
+
+    <h2 class="section-title reveal">Real Weddings, <em>Real Magic</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  </div>
+
+  <div class="gallery-grid reveal" id="galleryGrid">
+
+    <!-- populated by JS -->
+
+  </div>
+
+</section>
+
+
+
+<!-- FAQ -->
+
+<section class="section faq-bg">
+
+  <div class="section-header">
+
+    <span class="section-eyebrow reveal">Have Questions?</span>
+
+    <h2 class="section-title reveal">Frequently <em>Asked</em></h2>
+
+    <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+  </div>
+
+  <div class="faq-list" id="faqList">
+
+    <!-- populated by JS -->
+
+  </div>
+
+</section>
+
+
+
+<!-- NEWSLETTER -->
+
+<div class="newsletter-bg reveal-scale">
+
+  <h2 class="newsletter-title">Get Wedding Inspiration &<br>Exclusive Vendor Offers</h2>
+
+  <p class="newsletter-sub">Join 50,000+ couples receiving curated wedding ideas, seasonal deals, and planning guides.</p>
+
+  <div class="newsletter-form">
+
+    <input type="email" class="newsletter-input" placeholder="your@email.com">
+
+    <button class="newsletter-btn">Subscribe ✦</button>
+
+  </div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-grid">
+
+    <div>
+
+      <span class="footer-brand-name">Velora</span>
+
+      <span class="footer-brand-tagline">Wedding Marketplace</span>
+
+      <p class="footer-brand-desc">India's most trusted wedding marketplace — connecting couples with the finest vendors to create their perfect day.</p>
+
+      <div class="footer-socials">
+
+        <a class="social-btn" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="rgba(255,255,255,0.6)"/></svg></a>
+
+        <a class="social-btn" title="Pinterest"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.140-.828 3.33-.236.995.498 1.806 1.476 1.806 1.771 0 3.133-1.867 3.133-4.563 0-2.387-1.716-4.054-4.165-4.054-2.837 0-4.502 2.128-4.502 4.328 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.283c-.075.314-.245.995-.279 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.445 2.962.445 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></a>
+
+        <a class="social-btn" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+
+        <a class="social-btn" title="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="rgba(255,255,255,0.6)" stroke="none"/></svg></a>
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="footer-col-title">For Couples</div>
+
+      <ul class="footer-links">
+
+        <li><a href="#" onclick="showPage('marketplace')">Browse Vendors</a></li>
+
+        <li><a href="#" onclick="showPage('packages')">Wedding Packages</a></li>
+
+        <li><a href="#" onclick="showPage('quiz')">Wedding Quiz</a></li>
+
+        <li><a href="#" onclick="showPage('dashboard')">My Dashboard</a></li>
+
+        <li><a href="#">Budget Planner</a></li>
+
+        <li><a href="#">Inspiration</a></li>
+
+      </ul>
+
+    </div>
+
+    <div>
+
+      <div class="footer-col-title">For Vendors</div>
+
+      <ul class="footer-links">
+
+        <li><a href="#">List Your Business</a></li>
+
+        <li><a href="#" onclick="showPage('vendordash')">Vendor Dashboard</a></li>
+
+        <li><a href="#">Pricing Plans</a></li>
+
+        <li><a href="#">Success Stories</a></li>
+
+        <li><a href="#">Partner Program</a></li>
+
+      </ul>
+
+    </div>
+
+    <div>
+
+      <div class="footer-col-title">Company</div>
+
+      <ul class="footer-links">
+
+        <li><a href="#" onclick="showPage('about')">About Velora</a></li>
+
+        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+
+        <li><a href="#">Careers</a></li>
+
+        <li><a href="#">Press & Media</a></li>
+
+        <li><a href="#">Privacy Policy</a></li>
+
+        <li><a href="#">Terms of Service</a></li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <div class="footer-bottom-left">© 2025 Velora. Made with <span class="footer-bottom-heart">❤</span> for dream weddings.</div>
+
+    <div class="footer-bottom-right">
+
+      <a href="#">Privacy</a>
+
+      <a href="#">Terms</a>
+
+      <a href="#">Cookies</a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+</div>
+
+
+
+<!-- ======================== MARKETPLACE PAGE ======================== -->
+
+<div class="page" id="page-marketplace">
+
+  <div class="marketplace-hero">
+
+    <span class="section-eyebrow">12,000+ Verified Vendors</span>
+
+    <h1 class="section-title" style="margin-top:0.5rem">Find Your Perfect<br><em>Wedding Vendors</em></h1>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    <div class="search-wrap">
+
+      <div class="search-bar">
+
+        <input type="text" class="search-input" placeholder="Search venues, photographers, decorators..." id="marketSearch">
+
+        <button class="search-btn" onclick="filterVendors()">Search</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="filter-bar">
+
+    <div class="filter-chip active" onclick="filterCategory(this,'all')">All</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'venue')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Venues</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'photo')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Photography</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'bridal')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg> Bridal Wear</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'catering')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg> Catering</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'decor')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12c0-2.76 1.12-5.26 2.93-7.07"/><path d="M12 6v6l4 2"/></svg> Decor</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'makeup')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Makeup</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'mehendi')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg> Mehendi</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'music')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Music &amp; DJ</div>
+
+    <div class="filter-chip" onclick="filterCategory(this,'planner')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Planners</div>
+
+    <select class="filter-select"><option>Sort: Recommended</option><option>Price: Low–High</option><option>Price: High–Low</option><option>Rating: Top First</option></select>
+
+    <select class="filter-select"><option>All Cities</option><option>Mumbai</option><option>Delhi</option><option>Bangalore</option><option>Hyderabad</option><option>Pune</option></select>
+
+    <div class="view-toggle" style="margin-left:auto">
+
+      <button class="view-btn active" title="Grid">⊞</button>
+
+      <button class="view-btn" title="List">☰</button>
+
+    </div>
+
+  </div>
+
+  <div class="marketplace-content">
+
+    <div class="results-header">
+
+      <span class="results-count"><strong id="vendorCount">48</strong> vendors found</span>
+
+    </div>
+
+    <div class="vendors-grid" id="marketVendorsGrid"></div>
+
+  </div>
+
+  <div style="text-align:center;padding:3rem 0">
+
+    <button class="btn-outline" style="border:none;font-family:'Jost',sans-serif" onclick="this.textContent='Loading...'">Load More Vendors</button>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== VENDOR DETAIL PAGE ======================== -->
+
+<div class="page" id="page-vendor-detail">
+
+  <div class="vendor-detail-hero" style="background:linear-gradient(135deg,#f9e8ec,#f2d0d8)">
+
+    <div class="vendor-detail-hero-content">
+
+      <div class="vendor-detail-cat" id="vd-cat">Photography</div>
+
+      <h1 class="vendor-detail-name" id="vd-name">The Golden Lens Studio</h1>
+
+      <div style="display:flex;align-items:center;gap:1rem;margin-top:0.8rem;flex-wrap:wrap">
+
+        <span style="color:var(--gold2)">★★★★★</span>
+
+        <span style="color:rgba(255,255,255,0.75);font-size:0.85rem">4.9 (142 reviews)</span>
+
+        <span style="color:rgba(255,255,255,0.65);font-size:0.82rem">📍 Mumbai, Maharashtra</span>
+
+        <span style="background:rgba(255,255,255,0.2);padding:0.2rem 0.8rem;border-radius:20px;font-size:0.72rem;letter-spacing:0.1em">✓ Verified</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="vendor-detail-body">
+
+    <div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:1rem;color:var(--text)">About the Vendor</h3>
+
+      <p style="font-size:0.9rem;font-weight:300;line-height:1.9;color:var(--text2);margin-bottom:2rem">The Golden Lens Studio is a premium wedding photography studio based in Mumbai with 8+ years of experience capturing love stories. Known for their cinematic style and attention to emotional moments, they have documented over 500 weddings across India and internationally.</p>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:1rem;color:var(--text)">Packages</h3>
+
+      <div class="pkg-list">
+
+        <div class="pkg-list-item selected">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+
+            <div><strong style="font-size:0.95rem">Silver Package</strong><div style="font-size:0.8rem;color:var(--text3);margin-top:0.2rem">8 hours coverage · 400+ edited photos · 1 photographer</div></div>
+
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rose)">₹45,000</div>
+
+          </div>
+
+        </div>
+
+        <div class="pkg-list-item">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+
+            <div><strong style="font-size:0.95rem">Gold Package</strong><div style="font-size:0.8rem;color:var(--text3);margin-top:0.2rem">2 days · 800+ photos · 2 photographers · Drone</div></div>
+
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rose)">₹85,000</div>
+
+          </div>
+
+        </div>
+
+        <div class="pkg-list-item">
+
+          <div style="display:flex;justify-content:space-between;align-items:center">
+
+            <div><strong style="font-size:0.95rem">Platinum Package</strong><div style="font-size:0.8rem;color:var(--text3);margin-top:0.2rem">3 days · 1500+ photos + video · Full team · Album</div></div>
+
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rose)">₹1,40,000</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin:2rem 0 1rem;color:var(--text)">Reviews</h3>
+
+      <div class="reviews-list" id="reviewsList"></div>
+
+    </div>
+
+    <div>
+
+      <div class="booking-card">
+
+        <h3 class="booking-card-title">Book or Enquire</h3>
+
+        <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-control" placeholder="Priya & Rahul"></div>
+
+        <div class="form-group"><label class="form-label">Wedding Date</label><input type="date" class="form-control"></div>
+
+        <div class="form-group"><label class="form-label">Venue City</label><input type="text" class="form-control" placeholder="Mumbai"></div>
+
+        <div class="form-group"><label class="form-label">Package</label><select class="form-control"><option>Silver — ₹45,000</option><option>Gold — ₹85,000</option><option>Platinum — ₹1,40,000</option></select></div>
+
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="3" placeholder="Tell us about your wedding..."></textarea></div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;border:none;margin-top:0.5rem" onclick="alert('Inquiry sent! The vendor will respond within 24 hours. 🌸')">Send Inquiry ✦</button>
+
+        <button class="btn-outline" style="width:100%;justify-content:center;margin-top:0.8rem" onclick="alert('Added to your wishlist! ❤')">♡ Save to Wishlist</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== PACKAGES PAGE ======================== -->
+
+<div class="page" id="page-packages">
+
+  <section style="background:linear-gradient(160deg,var(--cream),#fff5f8);padding:8rem 2rem 5rem;text-align:center">
+
+    <span class="section-eyebrow">Curated for You</span>
+
+    <h1 class="section-title" style="margin-top:0.5rem">Complete Wedding <em>Packages</em></h1>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    <p class="section-sub" style="margin:0 auto">All-in-one bundled packages combining the best vendors for a seamless, stress-free wedding.</p>
+
+  </section>
+
+  <section class="section packages-bg">
+
+    <div class="packages-grid">
+
+      <div class="pkg-card reveal stagger-1">
+
+        <div class="pkg-header"><div class="pkg-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--rose)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><div class="pkg-name">Blossom</div><div class="pkg-tagline">Perfect for intimate celebrations</div><div class="pkg-price"><div class="pkg-price-val">₹2.5L</div><div class="pkg-price-note">Starting price · 50 guests</div></div></div>
+
+        <div class="pkg-body">
+
+          <div class="pkg-feature">Venue (up to 50 guests)</div>
+
+          <div class="pkg-feature">Photography (8 hrs)</div>
+
+          <div class="pkg-feature">Floral Decor</div>
+
+          <div class="pkg-feature">Bridal Makeup</div>
+
+          <div class="pkg-feature">Catering (veg menu)</div>
+
+          <div class="pkg-feature">Invitation Cards</div>
+
+        </div>
+
+        <div class="pkg-footer"><button class="pkg-btn pkg-btn-outline" onclick="showPage('auth')">Get Started</button></div>
+
+      </div>
+
+      <div class="pkg-card featured reveal stagger-2">
+
+        <div class="pkg-header"><div class="pkg-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--rose)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="pkg-name">Royal</div><div class="pkg-tagline">The complete wedding experience</div><div class="pkg-price"><div class="pkg-price-val">₹8L</div><div class="pkg-price-note">Starting price · 150 guests</div></div></div>
+
+        <div class="pkg-body">
+
+          <div class="pkg-feature">Premium Venue (150 guests)</div>
+
+          <div class="pkg-feature">Photography + Videography</div>
+
+          <div class="pkg-feature">Grand Floral Decor</div>
+
+          <div class="pkg-feature">Bridal + Family Makeup</div>
+
+          <div class="pkg-feature">Full Catering (2 menus)</div>
+
+          <div class="pkg-feature">Mehendi Artist</div>
+
+          <div class="pkg-feature">DJ + Sound System</div>
+
+          <div class="pkg-feature">Wedding Planner</div>
+
+          <div class="pkg-feature">Luxury Transport</div>
+
+        </div>
+
+        <div class="pkg-footer"><button class="pkg-btn pkg-btn-primary" onclick="showPage('auth')">Book Now ✦</button></div>
+
+      </div>
+
+      <div class="pkg-card reveal stagger-3">
+
+        <div class="pkg-header"><div class="pkg-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="var(--rose)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3L8 9l4 13 4-13-3-6"/><line x1="2" y1="9" x2="22" y2="9"/></svg></div><div class="pkg-name">Diamond</div><div class="pkg-tagline">Ultra-luxury, no compromise</div><div class="pkg-price"><div class="pkg-price-val">₹20L+</div><div class="pkg-price-note">Custom quote · 300+ guests</div></div></div>
+
+        <div class="pkg-body">
+
+          <div class="pkg-feature">5-star Venue / Resort</div>
+
+          <div class="pkg-feature">International Photographer</div>
+
+          <div class="pkg-feature">Cinematic Videography</div>
+
+          <div class="pkg-feature">Celebrity Makeup Artist</div>
+
+          <div class="pkg-feature">Live Band + DJ</div>
+
+          <div class="pkg-feature">Luxury Decor Design</div>
+
+          <div class="pkg-feature">Full Wedding Planning</div>
+
+          <div class="pkg-feature">Bridal Wear Styling</div>
+
+          <div class="pkg-feature">Honeymoon Planning</div>
+
+          <div class="pkg-feature">Guest Management</div>
+
+        </div>
+
+        <div class="pkg-footer"><button class="pkg-btn pkg-btn-outline" onclick="showPage('contact')">Request Quote</button></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- ======================== DASHBOARD ======================== -->
+
+<div class="page" id="page-dashboard">
+
+  <div class="dashboard-layout">
+
+    <aside class="dash-sidebar">
+
+      <div class="dash-user">
+
+        <div class="dash-avatar">P</div>
+
+        <div class="dash-user-name">Priya & Rahul Sharma</div>
+
+        <div class="dash-user-sub">Wedding: Dec 14, 2025 · Mumbai</div>
+
+      </div>
+
+      <ul class="dash-nav">
+
+        <li class="dash-nav-item active" onclick="switchDashTab(this,'overview')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Overview</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'bookings')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> My Bookings</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'budget')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> Budget Planner</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'checklist')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Checklist</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'wishlist')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span> Wishlist</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'quotes')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Quote Requests</li>
+
+        <li class="dash-nav-item" onclick="switchDashTab(this,'guests')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Guest List</li>
+
+        <li class="dash-nav-item" onclick="showPage('home')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span> Back to Home</li>
+
+      </ul>
+
+    </aside>
+
+    <main class="dash-content">
+
+      <div id="dash-overview">
+
+        <div class="dash-header">
+
+          <div><div class="dash-title">Welcome back, Priya ✦</div><div class="dash-subtitle">Your wedding is coming together beautifully.</div></div>
+
+          <button class="btn-primary" style="border:none" onclick="showPage('marketplace')">+ Add Vendor</button>
+
+        </div>
+
+        <div class="countdown-card">
+
+          <div class="countdown-label">Days Until Your Wedding</div>
+
+          <div class="countdown-nums" id="weddingCountdown"></div>
+
+        </div>
+
+        <div class="stats-grid">
+
+          <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="stat-val">7</div><div class="stat-label">Bookings Confirmed</div></div>
+
+          <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="stat-val">₹6.2L</div><div class="stat-label">Budget Used</div></div>
+
+          <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="stat-val">14</div><div class="stat-label">Wishlist Saves</div></div>
+
+          <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="stat-val">62%</div><div class="stat-label">Checklist Done</div></div>
+
+          <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="stat-val">3</div><div class="stat-label">Pending Quotes</div></div>
+
+        </div>
+
+        <h3 class="dash-section-title">Recent Bookings</h3>
+
+        <div id="dashBookingsList"></div>
+
+      </div>
+
+      <div id="dash-bookings" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">My Bookings</div><div class="dash-subtitle">All confirmed and pending bookings.</div></div></div>
+
+        <div id="dashBookingsFullList"></div>
+
+      </div>
+
+      <div id="dash-budget" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">Budget Planner</div><div class="dash-subtitle">Total Budget: ₹10,00,000</div></div></div>
+
+        <div id="dashBudget"></div>
+
+      </div>
+
+      <div id="dash-checklist" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">Wedding Checklist</div><div class="dash-subtitle">Track every task for your big day.</div></div></div>
+
+        <div id="dashChecklist"></div>
+
+      </div>
+
+      <div id="dash-wishlist" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">My Wishlist</div><div class="dash-subtitle">Vendors you've saved for later.</div></div></div>
+
+        <div class="vendors-grid" id="dashWishlistGrid"></div>
+
+      </div>
+
+      <div id="dash-quotes" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">Quote Requests</div><div class="dash-subtitle">Quotes you've requested from vendors.</div></div></div>
+
+        <div id="dashQuotes"></div>
+
+      </div>
+
+      <div id="dash-guests" style="display:none">
+
+        <div class="dash-header"><div><div class="dash-title">Guest List</div><div class="dash-subtitle">Manage your wedding guests.</div></div></div>
+
+        <p style="color:var(--text3);font-size:0.9rem">Guest list manager coming soon. You can currently track approx. <strong>148 guests</strong> confirmed out of 200 invited.</p>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== VENDOR DASHBOARD ======================== -->
+
+<div class="page" id="page-vendordash">
+
+  <div class="dashboard-layout">
+
+    <aside class="dash-sidebar">
+
+      <div class="dash-user">
+
+        <div class="dash-avatar">G</div>
+
+        <div class="dash-user-name">The Golden Lens Studio</div>
+
+        <div class="dash-user-sub">Photography · Mumbai · Verified ✓</div>
+
+      </div>
+
+      <ul class="dash-nav">
+
+        <li class="dash-nav-item active"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span> Analytics</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span> My Listings</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span> Bookings</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Inquiries</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span> Gallery</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Reviews</li>
+
+        <li class="dash-nav-item"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span> Earnings</li>
+
+        <li class="dash-nav-item" onclick="showPage('home')"><span class="dash-nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></span> Back to Home</li>
+
+      </ul>
+
+    </aside>
+
+    <main class="dash-content">
+
+      <div class="dash-header">
+
+        <div><div class="dash-title">Vendor Dashboard ✦</div><div class="dash-subtitle">Manage your listings, bookings, and performance.</div></div>
+
+        <button class="btn-primary" style="border:none">+ Add Package</button>
+
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="stat-val">4.2K</div><div class="stat-label">Profile Views</div></div>
+
+        <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="stat-val">28</div><div class="stat-label">New Inquiries</div></div>
+
+        <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="stat-val">12</div><div class="stat-label">Bookings</div></div>
+
+        <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="stat-val">₹8.4L</div><div class="stat-label">Revenue</div></div>
+
+        <div class="stat-card"><div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div class="stat-val">4.9</div><div class="stat-label">Avg Rating</div></div>
+
+      </div>
+
+      <h3 class="dash-section-title">Recent Inquiries</h3>
+
+      <div id="vendorInquiries"></div>
+
+    </main>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== ABOUT PAGE ======================== -->
+
+<div class="page" id="page-about">
+
+  <div class="about-hero">
+
+    <div>
+
+      <span class="section-eyebrow">Our Story</span>
+
+      <h1 class="section-title" style="margin-top:0.5rem">We Believe Every Love <em>Deserves</em><br>a Perfect Celebration</h1>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    </div>
+
+  </div>
+
+  <div class="about-story">
+
+    <div class="reveal-left">
+
+      <div class="about-visual"><svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 8 8"/><circle cx="12" cy="12" r="3"/><path d="M9.17 9.17a4 4 0 0 1 5.66 0"/><path d="M6.34 6.34a8 8 0 0 1 11.32 0"/></svg></div>
+
+    </div>
+
+    <div class="reveal-right">
+
+      <span class="section-eyebrow">How It Started</span>
+
+      <h2 class="section-title" style="font-size:2.2rem;text-align:left;margin:0.5rem 0 1.5rem">Built from a<br><em>Real Wedding Story</em></h2>
+
+      <div class="about-text-block">
+
+        <p>Velora was born out of frustration. Our founders, planning their own wedding in 2019, spent months scouring multiple apps, calling hundreds of vendors, comparing scattered spreadsheets, and losing track of everything. There had to be a better way.</p>
+
+        <p>They built Velora — a single, elegant marketplace where couples could discover, compare, and book every wedding vendor they needed, all in one beautifully designed platform.</p>
+
+        <p>Today, Velora connects 12,000+ verified vendors with nearly 100,000 couples across 350+ Indian cities. From intimate garden ceremonies to grand palace weddings, every couple deserves a seamless, joyful planning experience.</p>
+
+        <p>Our mission is simple: <em>make your wedding as magical to plan as it is to live.</em></p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <section class="section" style="background:var(--cream)">
+
+    <div class="section-header">
+
+      <span class="section-eyebrow reveal">Our People</span>
+
+      <h2 class="section-title reveal">The Team Behind <em>Velora</em></h2>
+
+      <div class="divider reveal"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-card reveal stagger-1"><div class="team-avatar">A</div><div class="team-name">Arjun Mehta</div><div class="team-role">Co-Founder & CEO</div></div>
+
+      <div class="team-card reveal stagger-2"><div class="team-avatar">S</div><div class="team-name">Shruti Joshi</div><div class="team-role">Co-Founder & CPO</div></div>
+
+      <div class="team-card reveal stagger-3"><div class="team-avatar">R</div><div class="team-name">Rohan Kapoor</div><div class="team-role">Head of Design</div></div>
+
+      <div class="team-card reveal stagger-4"><div class="team-avatar">N</div><div class="team-name">Neha Patel</div><div class="team-role">VP Vendor Relations</div></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+
+
+<!-- ======================== CONTACT PAGE ======================== -->
+
+<div class="page" id="page-contact">
+
+  <div class="contact-wrap">
+
+    <div class="reveal-left">
+
+      <div class="contact-info-card">
+
+        <span class="section-eyebrow" style="color:rgba(255,255,255,0.6);margin-bottom:1rem;display:block">Get in Touch</span>
+
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:white;margin-bottom:2rem">We'd Love to<br><em style="color:var(--gold2)">Hear from You</em></h2>
+
+        <div class="contact-info-item"><div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="contact-info-label">Email</div><div class="contact-info-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e1ece5e5e6c9ffece5e6fbe8a7e0e7">[email&#160;protected]</a></div></div></div>
+
+        <div class="contact-info-item"><div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l1.31-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="contact-info-label">Phone</div><div class="contact-info-val">+91 98765 43210</div></div></div>
+
+        <div class="contact-info-item"><div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-info-label">Office</div><div class="contact-info-val">Bandra West, Mumbai<br>Maharashtra 400050</div></div></div>
+
+        <div class="contact-info-item"><div class="contact-info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="contact-info-label">Support Hours</div><div class="contact-info-val">Mon–Sat, 9am – 7pm IST</div></div></div>
+
+      </div>
+
+    </div>
+
+    <div class="reveal-right">
+
+      <div class="contact-form-box">
+
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--text);margin-bottom:0.5rem">Send a Message</h2>
+
+        <p style="font-size:0.85rem;color:var(--text3);margin-bottom:2rem">Fill out the form and we'll get back to you within 24 hours.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+
+          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-control" placeholder="Priya"></div>
+
+          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-control" placeholder="Sharma"></div>
+
+        </div>
+
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-control" placeholder="priya@email.com"></div>
+
+        <div class="form-group"><label class="form-label">Subject</label><select class="form-control"><option>General Inquiry</option><option>Vendor Partnership</option><option>Technical Support</option><option>Press & Media</option></select></div>
+
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="5" placeholder="Tell us how we can help..."></textarea></div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;border:none;margin-top:0.5rem" onclick="alert('Message sent! We'll reply within 24 hours. 🌸')">Send Message ✦</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== AUTH PAGE ======================== -->
+
+<div class="page" id="page-auth">
+
+  <div class="auth-wrap">
+
+    <div class="auth-visual">
+
+      <div style="font-size:5rem;margin-bottom:1.5rem;position:relative;z-index:1;animation:floatY 3s ease-in-out infinite"><svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1a4 4 0 0 1 4 4c0 1.5-.5 2.5-1 3.5"/><path d="M12 1a4 4 0 0 0-4 4c0 1.5.5 2.5 1 3.5"/><path d="M23 12a4 4 0 0 1-4 4c-1.5 0-2.5-.5-3.5-1"/><path d="M23 12a4 4 0 0 0-4-4c-1.5 0-2.5.5-3.5 1"/><path d="M12 23a4 4 0 0 1-4-4c0-1.5.5-2.5 1-3.5"/><path d="M12 23a4 4 0 0 0 4-4c0-1.5-.5-2.5-1-3.5"/><path d="M1 12a4 4 0 0 1 4-4c1.5 0 2.5.5 3.5 1"/><path d="M1 12a4 4 0 0 0 4 4c1.5 0 2.5-.5 3.5-1"/></svg></div>
+
+      <div class="auth-visual-title">Your perfect wedding<br>starts here.</div>
+
+      <div class="auth-visual-sub">Join 95,000+ couples who planned their<br>dream weddings on Velora.</div>
+
+      <div style="display:flex;gap:2rem;margin-top:2.5rem;position:relative;z-index:1">
+
+        <div style="text-align:center;color:rgba(255,255,255,0.8)"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem">12K+</div><div style="font-size:0.7rem;letter-spacing:0.2em">VENDORS</div></div>
+
+        <div style="text-align:center;color:rgba(255,255,255,0.8)"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem">350+</div><div style="font-size:0.7rem;letter-spacing:0.2em">CITIES</div></div>
+
+        <div style="text-align:center;color:rgba(255,255,255,0.8)"><div style="font-family:'Cormorant Garamond',serif;font-size:2rem">4.9★</div><div style="font-size:0.7rem;letter-spacing:0.2em">RATING</div></div>
+
+      </div>
+
+    </div>
+
+    <div class="auth-form-wrap">
+
+      <div class="auth-form-box">
+
+        <h1 class="auth-form-title">Welcome to<br><em style="color:var(--rose)">Velora</em></h1>
+
+        <p class="auth-form-sub">Sign in or create an account to start planning your dream wedding.</p>
+
+        <div class="auth-tabs">
+
+          <button class="auth-tab active" onclick="switchAuthTab(this,'couple')">I'm a Couple</button>
+
+          <button class="auth-tab" onclick="switchAuthTab(this,'vendor')">I'm a Vendor</button>
+
+        </div>
+
+        <div class="social-login">
+
+          <button class="social-login-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> Google</button>
+
+          <button class="social-login-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</button>
+
+        </div>
+
+        <div class="auth-divider"><span>or continue with email</span></div>
+
+        <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="you@email.com"></div>
+
+        <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-control" placeholder="••••••••"></div>
+
+        <button class="btn-primary" style="width:100%;justify-content:center;border:none;margin-top:0.5rem" onclick="showPage('dashboard')">Sign In & Start Planning ✦</button>
+
+        <p style="text-align:center;font-size:0.82rem;color:var(--text3);margin-top:1.5rem">Don't have an account? <a href="#" style="color:var(--rose);text-decoration:none">Create one free</a></p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ======================== WEDDING QUIZ ======================== -->
+
+<div class="page" id="page-quiz">
+
+  <div class="quiz-wrap">
+
+    <span class="section-eyebrow">Personalized Experience</span>
+
+    <h1 class="section-title" style="margin-top:0.5rem">Find Your Perfect<br><em>Wedding Style</em></h1>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-gem"></div><div class="divider-line"></div></div>
+
+    <p class="section-sub" style="margin:0.5rem auto 2.5rem">Answer 4 quick questions and we'll recommend the perfect vendors and packages for your wedding.</p>
+
+    <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgress" style="width:25%"></div></div>
+
+    <div class="quiz-step active" id="quiz-1">
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem">What's your wedding style?</h3>
+
+      <p style="color:var(--text3);font-size:0.9rem;margin-bottom:1.5rem">Step 1 of 4</p>
+
+      <div class="quiz-options">
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="16"/><path d="M8 12s-3 2-3 5h14c0-3-3-5-3-5"/></svg></span><div class="quiz-option-label">Romantic Garden</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><div class="quiz-option-label">Royal Palace</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div class="quiz-option-label">Beach Destination</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></span><div class="quiz-option-label">Modern Urban</div></div>
+
+      </div>
+
+      <button class="btn-primary" style="border:none" onclick="nextQuizStep(2)">Continue →</button>
+
+    </div>
+
+    <div class="quiz-step" id="quiz-2">
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem">How many guests?</h3>
+
+      <p style="color:var(--text3);font-size:0.9rem;margin-bottom:1.5rem">Step 2 of 4</p>
+
+      <div class="quiz-options">
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span><div class="quiz-option-label">Intimate (under 50)</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div class="quiz-option-label">Mid-Size (50–150)</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><div class="quiz-option-label">Grand (150–300)</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><div class="quiz-option-label">Mega (300+)</div></div>
+
+      </div>
+
+      <button class="btn-primary" style="border:none" onclick="nextQuizStep(3)">Continue →</button>
+
+    </div>
+
+    <div class="quiz-step" id="quiz-3">
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem">What's your total budget?</h3>
+
+      <p style="color:var(--text3);font-size:0.9rem;margin-bottom:1.5rem">Step 3 of 4</p>
+
+      <div class="quiz-options">
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span><div class="quiz-option-label">Under ₹5 Lakhs</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div class="quiz-option-label">₹5L – ₹15L</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><div class="quiz-option-label">₹15L – ₹50L</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><div class="quiz-option-label">₹50L+</div></div>
+
+      </div>
+
+      <button class="btn-primary" style="border:none" onclick="nextQuizStep(4)">Continue →</button>
+
+    </div>
+
+    <div class="quiz-step" id="quiz-4">
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;margin-bottom:0.5rem">When's the big day?</h3>
+
+      <p style="color:var(--text3);font-size:0.9rem;margin-bottom:1.5rem">Step 4 of 4</p>
+
+      <div class="quiz-options">
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div class="quiz-option-label">Within 3 months</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span><div class="quiz-option-label">3 – 6 months</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.25V14"/><circle cx="16" cy="16" r="6"/></svg></span><div class="quiz-option-label">6 – 12 months</div></div>
+
+        <div class="quiz-option" onclick="selectQuizOption(this)"><span class="quiz-option-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span><div class="quiz-option-label">More than a year</div></div>
+
+      </div>
+
+      <button class="btn-primary" style="border:none" onclick="nextQuizStep(5)">See My Recommendations ✦</button>
+
+    </div>
+
+    <div class="quiz-step" id="quiz-5">
+
+      <div style="margin-bottom:1rem"><svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1a4 4 0 0 1 4 4c0 1.5-.5 2.5-1 3.5"/><path d="M12 1a4 4 0 0 0-4 4c0 1.5.5 2.5 1 3.5"/><path d="M23 12a4 4 0 0 1-4 4c-1.5 0-2.5-.5-3.5-1"/><path d="M23 12a4 4 0 0 0-4-4c-1.5 0-2.5.5-3.5 1"/><path d="M12 23a4 4 0 0 1-4-4c0-1.5.5-2.5 1-3.5"/><path d="M12 23a4 4 0 0 0 4-4c0-1.5-.5-2.5-1-3.5"/><path d="M1 12a4 4 0 0 1 4-4c1.5 0 2.5.5 3.5 1"/><path d="M1 12a4 4 0 0 0 4 4c1.5 0 2.5-.5 3.5-1"/></svg></div>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:400;color:var(--rose)">Your Wedding Profile is Ready!</h2>
+
+      <p style="color:var(--text3);margin:1rem auto 2rem;max-width:400px;font-size:0.9rem">Based on your answers, we've curated the perfect vendor recommendations and packages for your dream wedding.</p>
+
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+
+        <button class="btn-primary" style="border:none" onclick="showPage('marketplace')">View My Vendors ✦</button>
+
+        <button class="btn-outline" style="cursor:none" onclick="showPage('packages')">See Packages</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+// ===== DATA =====
+
+const SVG = {
+
+  venue:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+
+  camera:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+
+  video:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>`,
+
+  bridal:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M6 22v-5H4l2-8h12l2 8h-2v5"/></svg>`,
+
+  groom:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+
+  makeup:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+
+  mehendi:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>`,
+
+  decor:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+
+  catering:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+
+  music:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
+
+  band:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H5a2 2 0 0 0-2 2"/><path d="M15 17h4a2 2 0 0 1 2 2"/><rect x="7" y="2" width="10" height="14" rx="2" ry="2"/></svg>`,
+
+  planner:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+
+  invite:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+
+  cake:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2 1 2 1"/><line x1="2" y1="21" x2="22" y2="21"/><line x1="7" y1="11" x2="7" y2="8"/><line x1="12" y1="11" x2="12" y2="6"/><line x1="17" y1="11" x2="17" y2="8"/></svg>`,
+
+  jewelry:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>`,
+
+  honeymoon:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l1.31-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+
+  transport:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+
+  activities:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+
+  pin:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+
+  eye:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+
+  msgcircle:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+
+  calendar:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+
+  dollar:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+
+  star:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+
+};
+
+
+
+const CATEGORIES = [
+
+  {icon:SVG.venue,name:'Venues',count:'2,400+'},
+
+  {icon:SVG.camera,name:'Photography',count:'1,800+'},
+
+  {icon:SVG.video,name:'Videography',count:'950+'},
+
+  {icon:SVG.bridal,name:'Bridal Wear',count:'1,200+'},
+
+  {icon:SVG.groom,name:'Groom Wear',count:'640+'},
+
+  {icon:SVG.makeup,name:'Makeup',count:'880+'},
+
+  {icon:SVG.mehendi,name:'Mehendi',count:'720+'},
+
+  {icon:SVG.decor,name:'Decor',count:'1,100+'},
+
+  {icon:SVG.catering,name:'Catering',count:'1,350+'},
+
+  {icon:SVG.music,name:'DJ & Music',count:'560+'},
+
+  {icon:SVG.band,name:'Live Bands',count:'280+'},
+
+  {icon:SVG.planner,name:'Planners',count:'420+'},
+
+  {icon:SVG.invite,name:'Invitations',count:'380+'},
+
+  {icon:SVG.cake,name:'Cakes',count:'640+'},
+
+  {icon:SVG.jewelry,name:'Jewelry',count:'820+'},
+
+  {icon:SVG.honeymoon,name:'Honeymoon',count:'340+'},
+
+  {icon:SVG.transport,name:'Transport',count:'290+'},
+
+  {icon:SVG.activities,name:'Activities',count:'180+'},
+
+];
+
+
+
+const VENDORS = [
+
+  {id:1,name:'The Golden Lens',cat:'Photography',loc:'Mumbai',rating:4.9,reviews:142,price:'₹45,000',badge:'Top Rated',img:'https://picsum.photos/id/1060/600/400',tags:['photo']},
+
+  {id:2,name:'Regal Palace Venue',cat:'Venue',loc:'Delhi',rating:4.8,reviews:98,price:'₹2,50,000',badge:'Luxury',img:'https://picsum.photos/id/164/600/400',tags:['venue']},
+
+  {id:3,name:'Flora & Bloom Decor',cat:'Decoration',loc:'Bangalore',rating:4.7,reviews:214,price:'₹85,000',badge:'Trending',img:'https://picsum.photos/id/152/600/400',tags:['decor']},
+
+  {id:4,name:'Radha Bridal Studio',cat:'Bridal Wear',loc:'Jaipur',rating:4.9,reviews:187,price:'₹35,000',badge:'Best Seller',img:'https://picsum.photos/id/1009/600/400',tags:['bridal']},
+
+  {id:5,name:'Chef Rajesh Caterers',cat:'Catering',loc:'Mumbai',rating:4.8,reviews:312,price:'₹800/plate',badge:'Verified',img:'https://picsum.photos/id/292/600/400',tags:['catering']},
+
+  {id:6,name:'Meera Makeup Artistry',cat:'Makeup Artist',loc:'Chennai',rating:4.9,reviews:156,price:'₹18,000',badge:'Premium',img:'https://picsum.photos/id/1027/600/400',tags:['makeup']},
+
+  {id:7,name:'Cinematic Frames',cat:'Videography',loc:'Hyderabad',rating:4.7,reviews:89,price:'₹65,000',badge:'New',img:'https://picsum.photos/id/250/600/400',tags:['photo']},
+
+  {id:8,name:'Sitar Beats DJ',cat:'Music & DJ',loc:'Pune',rating:4.6,reviews:74,price:'₹22,000',badge:'Popular',img:'https://picsum.photos/id/145/600/400',tags:['music']},
+
+  {id:9,name:'Lakshmi Mehendi',cat:'Mehendi Artist',loc:'Udaipur',rating:4.9,reviews:203,price:'₹8,500',badge:'Top Rated',img:'https://picsum.photos/id/116/600/400',tags:['mehendi']},
+
+  {id:10,name:'Anaya Wedding Planners',cat:'Wedding Planner',loc:'Mumbai',rating:4.8,reviews:127,price:'₹1,20,000',badge:'Premium',img:'https://picsum.photos/id/42/600/400',tags:['planner']},
+
+  {id:11,name:'Ivory Cake Studio',cat:'Wedding Cakes',loc:'Delhi',rating:4.7,reviews:94,price:'₹12,000',badge:'Trending',img:'https://picsum.photos/id/431/600/400',tags:['catering']},
+
+  {id:12,name:'Luxe Transport Co.',cat:'Transport',loc:'Bangalore',rating:4.6,reviews:58,price:'₹15,000',badge:'Verified',img:'https://picsum.photos/id/111/600/400',tags:['venue']},
+
+];
+
+
+
+const TESTIMONIALS = [
+
+  {text:'Velora made planning our wedding so effortless. We found our photographer, caterer, and decor team all in one place within a week!',name:'Priya & Arjun',detail:'Married in Mumbai · Nov 2024',stars:'★★★★★',avatar:'P'},
+
+  {text:'The budget planner and vendor comparison features saved us lakhs. Every vendor was professional and exactly as described on the platform.',name:'Sneha & Rohit',detail:'Married in Jaipur · Oct 2024',stars:'★★★★★',avatar:'S'},
+
+  {text:'I was skeptical at first, but Velora exceeded every expectation. Our wedding planner found us through this platform and she was absolutely incredible.',name:'Kavya & Vikram',detail:'Married in Goa · Dec 2024',stars:'★★★★★',avatar:'K'},
+
+  {text:'The checklist and booking dashboard kept us organized throughout the 8-month planning process. Couldn\'t imagine doing it without Velora.',name:'Aditi & Sanjay',detail:'Married in Bangalore · Sep 2024',stars:'★★★★★',avatar:'A'},
+
+  {text:'We found our dream venue in Udaipur through Velora at a price that fit our budget perfectly. The platform\'s recommendations were spot-on.',name:'Riya & Karan',detail:'Married in Udaipur · Jan 2025',stars:'★★★★★',avatar:'R'},
+
+  {text:'The verified vendor badges gave us so much confidence. Every booking went smoothly and the vendors were outstanding quality.',name:'Meera & Aditya',detail:'Married in Hyderabad · Feb 2025',stars:'★★★★★',avatar:'M'},
+
+];
+
+
+
+const FAQS = [
+
+  {q:'How does Velora verify vendors?',a:'Every vendor undergoes a thorough verification process including business document review, portfolio assessment, background check, and a trial period with monitored early bookings. Only vendors who maintain a 4.0+ rating remain listed.'},
+
+  {q:'Can I book multiple services through Velora?',a:'Absolutely! You can book as many services as you need from different vendors. Your dashboard keeps all bookings organized in one place so you always know the status of every vendor and payment.'},
+
+  {q:'Is it safe to make payments through Velora?',a:'Yes. Velora uses bank-grade encryption and a secure escrow payment system. Your money is held safely until the service is confirmed complete, protecting both you and the vendor.'},
+
+  {q:'What if a vendor cancels or disappoints?',a:'Velora has a vendor guarantee policy. In the rare event of cancellation, we\'ll help you find an equally good replacement at priority. If quality doesn\'t match the listing, we offer a partial refund depending on the situation.'},
+
+  {q:'Can vendors list their services for free?',a:'Yes, vendors can create a basic listing for free. Premium listing tiers are available that include featured placement, analytics, priority support, and enhanced profile features.'},
+
+  {q:'Does Velora cover destinations outside my city?',a:'Many vendors on Velora offer outstation services and travel to your wedding location. You can filter specifically for vendors who service your area or are open to destination travel.'},
+
+];
+
+
+
+const GALLERY_ITEMS = [
+
+  {img:'https://picsum.photos/id/152/800/600',label:'Floral Decor · Mumbai'},
+
+  {img:'https://picsum.photos/id/1060/600/400',label:'Candid Photography'},
+
+  {img:'https://picsum.photos/id/1009/600/400',label:'Bridal Fashion'},
+
+  {img:'https://picsum.photos/id/431/600/400',label:'Wedding Cake · Delhi'},
+
+  {img:'https://picsum.photos/id/164/600/400',label:'Venue Lighting'},
+
+  {img:'https://picsum.photos/id/119/600/400',label:'Ceremony Decor'},
+
+  {img:'https://picsum.photos/id/145/600/400',label:'Reception Night'},
+
+];
+
+
+
+const REVIEWS = [
+
+  {name:'Kavya Sharma',stars:'★★★★★',text:'Absolutely breathtaking work. Every shot from our wedding tells a story. The team was professional, creative, and so warm.'},
+
+  {name:'Rohit Verma',stars:'★★★★★',text:'We\'re from Delhi and hired them for our Mumbai wedding. The logistics were seamless and the final photos are beyond our imagination.'},
+
+  {name:'Priya & Ajay',stars:'★★★★☆',text:'Wonderful experience overall. Very responsive and delivered ahead of the promised timeline. The drone shots of our reception are stunning.'},
+
+];
+
+
+
+const DASH_BOOKINGS = [
+
+  {emoji:SVG.camera,name:'The Golden Lens Studio',cat:'Photography',status:'confirmed'},
+
+  {emoji:SVG.decor,name:'Flora & Bloom Decor',cat:'Decoration',status:'confirmed'},
+
+  {emoji:SVG.catering,name:'Chef Rajesh Caterers',cat:'Catering',status:'confirmed'},
+
+  {emoji:SVG.makeup,name:'Meera Makeup Artistry',cat:'Makeup',status:'pending'},
+
+  {emoji:SVG.music,name:'Sitar Beats DJ',cat:'Music & DJ',status:'inquiry'},
+
+  {emoji:SVG.venue,name:'Grand Ballroom Venue',cat:'Venue',status:'confirmed'},
+
+  {emoji:SVG.mehendi,name:'Lakshmi Mehendi',cat:'Mehendi',status:'confirmed'},
+
+];
+
+
+
+const BUDGET_ITEMS = [
+
+  {cat:'Venue',spent:250000,total:300000},
+
+  {cat:'Photography + Video',spent:85000,total:100000},
+
+  {cat:'Catering',spent:180000,total:200000},
+
+  {cat:'Decor',spent:90000,total:120000},
+
+  {cat:'Bridal Wear',spent:45000,total:60000},
+
+  {cat:'Makeup & Mehendi',spent:25000,total:30000},
+
+  {cat:'Music & Entertainment',spent:0,total:25000},
+
+];
+
+
+
+const CHECKLIST = [
+
+  {text:'Book wedding venue',date:'Done ✓',done:true},
+
+  {text:'Hire wedding photographer',date:'Done ✓',done:true},
+
+  {text:'Book catering service',date:'Done ✓',done:true},
+
+  {text:'Order bridal outfit',date:'Done ✓',done:true},
+
+  {text:'Hire makeup artist',date:'Jun 30',done:false},
+
+  {text:'Book mehendi artist',date:'Done ✓',done:true},
+
+  {text:'Arrange DJ / music',date:'Jul 15',done:false},
+
+  {text:'Send wedding invitations',date:'Aug 1',done:false},
+
+  {text:'Book honeymoon flights',date:'Sep 1',done:false},
+
+  {text:'Arrange guest transportation',date:'Oct 1',done:false},
+
+  {text:'Final dress fitting',date:'Nov 30',done:false},
+
+  {text:'Confirm all vendor timings',date:'Dec 10',done:false},
+
+];
+
+
+
+const VENDOR_INQUIRIES = [
+
+  {name:'Priya & Rahul',date:'Mar 15 · Wedding Dec 14',pkg:'Gold Package',status:'New'},
+
+  {name:'Anjali & Dev',date:'Mar 12 · Wedding Nov 22',pkg:'Silver Package',status:'Replied'},
+
+  {name:'Shreya & Nikhil',date:'Mar 10 · Wedding Oct 5',pkg:'Platinum Package',status:'Confirmed'},
+
+];
+
+
+
+// ===== INIT =====
+
+window.addEventListener('load', ()=>{
+
+  setTimeout(()=>{ document.getElementById('loader').classList.add('hidden'); }, 2400);
+
+  buildCategories();
+
+  buildVendors(document.getElementById('vendorsGrid'), VENDORS.slice(0,6));
+
+  buildVendors(document.getElementById('marketVendorsGrid'), VENDORS);
+
+  buildTestimonials();
+
+  buildGallery();
+
+  buildFAQ();
+
+  buildDashboard();
+
+  buildVendorDashboard();
+
+  buildReviews();
+
+  buildWeddingCountdown();
+
+  initScrollReveal();
+
+  initPetals();
+
+  initNav();
+
+});
+
+
+
+function buildCategories(){
+
+  const grid = document.getElementById('categoriesGrid');
+
+  if(!grid) return;
+
+  grid.innerHTML = CATEGORIES.map((c,i)=>`
+
+    <div class="cat-card reveal stagger-${(i%6)+1}" onclick="filterByCategory('${c.name}')">
+
+      <span class="cat-icon">${c.icon}</span>
+
+      <div class="cat-name">${c.name}</div>
+
+      <div class="cat-count">${c.count}</div>
+
+    </div>`).join('');
+
+  initScrollReveal();
+
+}
+
+
+
+function buildVendors(grid, vendors){
+
+  if(!grid) return;
+
+  grid.innerHTML = vendors.map(v=>`
+
+    <div class="vendor-card reveal">
+
+      <div class="vendor-img">
+
+        <img src="${v.img}" alt="${v.name}" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy">
+
+        <div class="vendor-badge">${v.badge}</div>
+
+        <button class="vendor-wishlist" onclick="toggleWishlist(this)">♡</button>
+
+      </div>
+
+      <div class="vendor-body">
+
+        <div class="vendor-cat">${v.cat}</div>
+
+        <div class="vendor-name">${v.name}</div>
+
+        <div class="vendor-loc">${SVG.pin} ${v.loc}</div>
+
+        <div class="vendor-meta">
+
+          <div class="vendor-rating">★★★★★ <span>${v.rating} (${v.reviews})</span></div>
+
+          <div class="vendor-price">${v.price}<small>/onwards</small></div>
+
+        </div>
+
+        <div class="vendor-actions">
+
+          <button class="vendor-actions btn-sm btn-sm-ghost" onclick="showPage('vendor-detail')">View Details</button>
+
+          <button class="vendor-actions btn-sm btn-sm-primary" onclick="showPage('vendor-detail')">Book Now</button>
+
+        </div>
+
+      </div>
+
+    </div>`).join('');
+
+  initScrollReveal();
+
+}
+
+
+
+function gradientFor(cat){
+
+  const m={'Photography':'#fde8ec,#f9c0cc','Venue':'#e8edf9,#c0caee','Decoration':'#f9ede8,#f0c4b0','Bridal Wear':'#fce8f5,#f2b8e0','Catering':'#edf9e8,#b8eac0','Makeup Artist':'#f9f0e8,#eecca0','Videography':'#e8f9f6,#a0eed8','Music & DJ':'#ede8f9,#c0ace8','Mehendi Artist':'#f9f5e8,#eed8a0','Wedding Planner':'#e8f4f9,#a0cce8','Wedding Cakes':'#fff0e8,#ffc8a0','Transport':'#f0f9e8,#b8eca0'};
+
+  return m[cat]||'#fde8ec,#f9c0cc';
+
+}
+
+
+
+function buildTestimonials(){
+
+  const track = document.getElementById('testiTrack');
+
+  if(!track) return;
+
+  const doubled = [...TESTIMONIALS,...TESTIMONIALS];
+
+  track.innerHTML = doubled.map(t=>`
+
+    <div class="testi-card">
+
+      <span class="testi-quote">"</span>
+
+      <p class="testi-text">${t.text}</p>
+
+      <div class="testi-author">
+
+        <div class="testi-avatar">${t.avatar}</div>
+
+        <div>
+
+          <div class="testi-stars">${t.stars}</div>
+
+          <div class="testi-name">${t.name}</div>
+
+          <div class="testi-detail">${t.detail}</div>
+
+        </div>
+
+      </div>
+
+    </div>`).join('');
+
+}
+
+
+
+function buildGallery(){
+
+  const g = document.getElementById('galleryGrid');
+
+  if(!g) return;
+
+  g.innerHTML = GALLERY_ITEMS.map((item,i)=>`
+
+    <div class="gallery-item">
+
+      <img src="${item.img}" alt="${item.label}" loading="lazy" style="width:100%;height:${i===0?420:200}px;object-fit:cover;display:block;border-radius:20px">
+
+      <div class="gallery-overlay"><span class="gallery-label">${item.label}</span></div>
+
+    </div>`).join('');
+
+}
+
+
+
+function buildFAQ(){
+
+  const list = document.getElementById('faqList');
+
+  if(!list) return;
+
+  list.innerHTML = FAQS.map((f,i)=>`
+
+    <div class="faq-item reveal stagger-${i%4+1}">
+
+      <div class="faq-q" onclick="toggleFAQ(this.parentElement)">
+
+        <span class="faq-q-text">${f.q}</span>
+
+        <div class="faq-toggle">+</div>
+
+      </div>
+
+      <div class="faq-a"><div class="faq-a-inner">${f.a}</div></div>
+
+    </div>`).join('');
+
+}
+
+
+
+function toggleFAQ(el){
+
+  el.classList.toggle('open');
+
+}
+
+
+
+function buildReviews(){
+
+  const list = document.getElementById('reviewsList');
+
+  if(!list) return;
+
+  list.innerHTML = REVIEWS.map(r=>`
+
+    <div class="review-item">
+
+      <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:0.4rem">
+
+        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blush),var(--pink));display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--deep-rose)">${r.name[0]}</div>
+
+        <div><div class="review-author">${r.name}</div><div class="review-stars">${r.stars}</div></div>
+
+      </div>
+
+      <p class="review-text">${r.text}</p>
+
+    </div>`).join('');
+
+}
+
+
+
+function buildDashboard(){
+
+  const bookList = document.getElementById('dashBookingsList');
+
+  if(bookList) bookList.innerHTML = DASH_BOOKINGS.slice(0,4).map(b=>`
+
+    <div class="booking-list-item">
+
+      <div class="booking-vendor-img">${b.emoji}</div>
+
+      <div><div class="booking-vendor-name">${b.name}</div><div class="booking-vendor-cat">${b.cat}</div></div>
+
+      <span class="booking-status status-${b.status}">${b.status}</span>
+
+    </div>`).join('');
+
+
+
+  const fullList = document.getElementById('dashBookingsFullList');
+
+  if(fullList) fullList.innerHTML = DASH_BOOKINGS.map(b=>`
+
+    <div class="booking-list-item">
+
+      <div class="booking-vendor-img">${b.emoji}</div>
+
+      <div><div class="booking-vendor-name">${b.name}</div><div class="booking-vendor-cat">${b.cat}</div></div>
+
+      <span class="booking-status status-${b.status}">${b.status}</span>
+
+    </div>`).join('');
+
+
+
+  const budgetEl = document.getElementById('dashBudget');
+
+  if(budgetEl){
+
+    const total=BUDGET_ITEMS.reduce((s,x)=>s+x.total,0);
+
+    const spent=BUDGET_ITEMS.reduce((s,x)=>s+x.spent,0);
+
+    budgetEl.innerHTML=`
+
+      <div style="display:flex;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem">
+
+        <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:1.5rem;flex:1;min-width:160px;text-align:center">
+
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--rose)">₹${(spent/100000).toFixed(1)}L</div>
+
+          <div style="font-size:0.75rem;color:var(--text3)">Total Spent</div>
+
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:1.5rem;flex:1;min-width:160px;text-align:center">
+
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--text)">₹${((total-spent)/100000).toFixed(1)}L</div>
+
+          <div style="font-size:0.75rem;color:var(--text3)">Remaining</div>
+
+        </div>
+
+        <div style="background:white;border:1px solid var(--border);border-radius:18px;padding:1.5rem;flex:1;min-width:160px;text-align:center">
+
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--gold)">₹${(total/100000).toFixed(0)}L</div>
+
+          <div style="font-size:0.75rem;color:var(--text3)">Total Budget</div>
+
+        </div>
+
+      </div>
+
+      ${BUDGET_ITEMS.map(b=>`
+
+        <div style="background:white;border:1px solid var(--border);border-radius:14px;padding:1.2rem;margin-bottom:0.8rem">
+
+          <div class="budget-row"><span class="budget-category">${b.cat}</span><span class="budget-amount">₹${b.spent.toLocaleString('en-IN')} / ₹${b.total.toLocaleString('en-IN')}</span></div>
+
+          <div class="budget-bar"><div class="budget-fill" style="width:${Math.round(b.spent/b.total*100)}%"></div></div>
+
+        </div>`).join('')}`;
+
+  }
+
+
+
+  const checklistEl = document.getElementById('dashChecklist');
+
+  if(checklistEl) checklistEl.innerHTML = CHECKLIST.map(c=>`
+
+    <div class="checklist-item ${c.done?'done':''}" onclick="toggleChecklist(this)">
+
+      <div class="checklist-cb">${c.done?'✓':''}</div>
+
+      <span class="checklist-text">${c.text}</span>
+
+      <span class="checklist-date">${c.date}</span>
+
+    </div>`).join('');
+
+
+
+  const wishlistGrid = document.getElementById('dashWishlistGrid');
+
+  if(wishlistGrid) buildVendors(wishlistGrid, VENDORS.slice(0,4));
+
+
+
+  const quotesEl = document.getElementById('dashQuotes');
+
+  if(quotesEl) quotesEl.innerHTML = `
+
+    <div class="booking-list-item"><div class="booking-vendor-img">📷</div><div><div class="booking-vendor-name">Studio Prem Photography</div><div class="booking-vendor-cat">Awaiting response · Sent Mar 10</div></div><span class="booking-status status-pending">Pending</span></div>
+
+    <div class="booking-list-item"><div class="booking-vendor-img">🎂</div><div><div class="booking-vendor-name">Sugar & Spice Bakery</div><div class="booking-vendor-cat">Awaiting response · Sent Mar 12</div></div><span class="booking-status status-pending">Pending</span></div>
+
+    <div class="booking-list-item"><div class="booking-vendor-img">✈️</div><div><div class="booking-vendor-name">Luxe Honeymoon Planners</div><div class="booking-vendor-cat">Quote received · ₹1,20,000</div></div><span class="booking-status status-confirmed">Received</span></div>`;
+
+}
+
+
+
+function buildVendorDashboard(){
+
+  const inq = document.getElementById('vendorInquiries');
+
+  if(!inq) return;
+
+  inq.innerHTML = VENDOR_INQUIRIES.map(i=>`
+
+    <div class="booking-list-item">
+
+      <div class="booking-vendor-img">💌</div>
+
+      <div><div class="booking-vendor-name">${i.name}</div><div class="booking-vendor-cat">${i.date} · ${i.pkg}</div></div>
+
+      <span class="booking-status status-${i.status==='New'?'inquiry':i.status==='Replied'?'pending':'confirmed'}">${i.status}</span>
+
+    </div>`).join('');
+
+}
+
+
+
+function buildWeddingCountdown(){
+
+  const weddingDate = new Date('2025-12-14');
+
+  const now = new Date();
+
+  const diff = weddingDate - now;
+
+  if(diff <= 0) return;
+
+  const days = Math.floor(diff/(1000*60*60*24));
+
+  const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+
+  const mins = Math.floor((diff%(1000*60*60))/(1000*60));
+
+  const el = document.getElementById('weddingCountdown');
+
+  if(el) el.innerHTML = [
+
+    {val:Math.floor(days/30),label:'Months'},
+
+    {val:days%30,label:'Days'},
+
+    {val:hours,label:'Hours'},
+
+    {val:mins,label:'Mins'},
+
+  ].map(x=>`<div class="countdown-unit"><span class="countdown-val">${String(x.val).padStart(2,'0')}</span><div class="countdown-unit-label">${x.label}</div></div>`).join('');
+
+}
+
+
+
+function toggleChecklist(el){el.classList.toggle('done');const cb=el.querySelector('.checklist-cb');cb.textContent=el.classList.contains('done')?'✓':'';}
+
+function toggleWishlist(btn){btn.classList.toggle('active');btn.textContent=btn.classList.contains('active')?'♥':'♡';}
+
+
+
+function switchDashTab(el,tab){
+
+  document.querySelectorAll('.dash-nav-item').forEach(i=>i.classList.remove('active'));
+
+  el.classList.add('active');
+
+  document.querySelectorAll('#page-dashboard main>div[id^="dash-"]').forEach(d=>d.style.display='none');
+
+  const target = document.getElementById('dash-'+tab);
+
+  if(target) target.style.display='block';
+
+}
+
+
+
+function switchAuthTab(el,type){
+
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+
+  el.classList.add('active');
+
+}
+
+
+
+function selectQuizOption(el){
+
+  el.closest('.quiz-options').querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));
+
+  el.classList.add('selected');
+
+}
+
+
+
+function nextQuizStep(n){
+
+  document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
+
+  const next=document.getElementById('quiz-'+n);
+
+  if(next){next.classList.add('active');}
+
+  const pct=Math.min((n-1)*25,100);
+
+  const prog=document.getElementById('quizProgress');
+
+  if(prog) prog.style.width=pct+'%';
+
+}
+
+
+
+function filterCategory(el,cat){
+
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+
+  el.classList.add('active');
+
+  const vendors = cat==='all'?VENDORS:VENDORS.filter(v=>v.tags.includes(cat));
+
+  const grid=document.getElementById('marketVendorsGrid');
+
+  if(grid){buildVendors(grid,vendors);}
+
+  const count=document.getElementById('vendorCount');
+
+  if(count) count.textContent=vendors.length;
+
+}
+
+
+
+function filterByCategory(name){
+
+  showPage('marketplace');
+
+}
+
+
+
+function filterVendors(){
+
+  const q=document.getElementById('marketSearch')?.value.toLowerCase()||'';
+
+  const filtered=q?VENDORS.filter(v=>v.name.toLowerCase().includes(q)||v.cat.toLowerCase().includes(q)||v.loc.toLowerCase().includes(q)):VENDORS;
+
+  buildVendors(document.getElementById('marketVendorsGrid'),filtered);
+
+  const count=document.getElementById('vendorCount');
+
+  if(count) count.textContent=filtered.length;
+
+}
+
+
+
+function calculateBudget(){
+
+  const style=document.getElementById('calcStyle')?.value;
+
+  const city=document.getElementById('calcCity')?.value;
+
+  const services=document.getElementById('calcServices')?.value;
+
+  if(!style||!city) return;
+
+  const base={intimate:[100000,200000],mid:[300000,600000],grand:[700000,1500000],luxury:[2000000,5000000]}[style]||[100000,200000];
+
+  const cityMult={metro:1.4,tier2:1.0,tier3:0.7}[city]||1;
+
+  const svcMult={basic:1,standard:1.3,premium:1.7}[services]||1;
+
+  const lo=Math.round(base[0]*cityMult*svcMult);
+
+  const hi=Math.round(base[1]*cityMult*svcMult);
+
+  const fmt=n=>n>=100000?'₹'+(n/100000).toFixed(1)+'L':'₹'+n.toLocaleString('en-IN');
+
+  const result=document.getElementById('calcResult');
+
+  const val=document.getElementById('calcVal');
+
+  if(result&&val){val.textContent=fmt(lo)+' — '+fmt(hi);result.classList.add('show');}
+
+}
+
+
+
+// ===== PAGE ROUTING =====
+
+function showPage(name){
+
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+
+  const target=document.getElementById('page-'+name);
+
+  if(target){target.classList.add('active');}
+
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  initScrollReveal();
+
+}
+
+
+
+// ===== NAV =====
+
+function initNav(){
+
+  window.addEventListener('scroll',()=>{
+
+    document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
+
+  });
+
+}
+
+
+
+function toggleMobileNav(){
+
+  const btn=document.getElementById('menuBtn');
+
+  const nav=document.getElementById('mobileNav');
+
+  btn.classList.toggle('open');
+
+  nav.classList.toggle('open');
+
+}
+
+
+
+// ===== SCROLL REVEAL =====
+
+function initScrollReveal(){
+
+  setTimeout(()=>{
+
+    const els=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+
+    const obs=new IntersectionObserver((entries)=>{
+
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+
+    },{threshold:0.12});
+
+    els.forEach(el=>obs.observe(el));
+
+  },100);
+
+}
+
+
+
+// ===== PETALS =====
+
+function initPetals(){
+
+  const canvas=document.getElementById('petals-canvas');
+
+  const ctx=canvas.getContext('2d');
+
+  let W,H,petals=[];
+
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+
+  resize();
+
+  window.addEventListener('resize',resize);
+
+  const COLORS=['#f9a8c0','#f7c5d5','#fce4ec','#f48fb1','#f8bbd0','#ffcdd2','#e8a0b4','#ffdde6'];
+
+  class Petal{
+
+    constructor(){this.reset();}
+
+    reset(){
+
+      this.x=Math.random()*W;
+
+      this.y=-20;
+
+      this.r=Math.random()*6+3;
+
+      this.color=COLORS[Math.floor(Math.random()*COLORS.length)];
+
+      this.vx=(Math.random()-0.5)*0.8;
+
+      this.vy=Math.random()*1.2+0.4;
+
+      this.rot=Math.random()*Math.PI*2;
+
+      this.rotSpeed=(Math.random()-0.5)*0.04;
+
+      this.opacity=Math.random()*0.5+0.3;
+
+    }
+
+    update(){
+
+      this.x+=this.vx+Math.sin(this.y*0.01)*0.3;
+
+      this.y+=this.vy;
+
+      this.rot+=this.rotSpeed;
+
+      if(this.y>H+20){this.reset();}
+
+    }
+
+    draw(){
+
+      ctx.save();
+
+      ctx.globalAlpha=this.opacity;
+
+      ctx.translate(this.x,this.y);
+
+      ctx.rotate(this.rot);
+
+      ctx.beginPath();
+
+      ctx.ellipse(0,0,this.r,this.r*1.8,0,0,Math.PI*2);
+
+      ctx.fillStyle=this.color;
+
+      ctx.fill();
+
+      ctx.restore();
+
+    }
+
+  }
+
+  for(let i=0;i<55;i++){const p=new Petal();p.y=Math.random()*H;petals.push(p);}
+
+  function loop(){
+
+    ctx.clearRect(0,0,W,H);
+
+    petals.forEach(p=>{p.update();p.draw();});
+
+    requestAnimationFrame(loop);
+
+  }
+
+  loop();
+
+}
+
+
+
+</script>
+
+</body>
+
+</html>
